@@ -21,30 +21,33 @@ void starter()
 #endif
 }
 
-int binary_search(int arr[], int n, int element)
+int count_distinct(int a[], int n)
 {
-	int start = 0;
-	int end = n - 1;
-	while (start <= end)
+	int unique_elements = 0;
+	for (int i = 0; i < n; i++)
 	{
-		int mid = start + (end - start) / 2;
-		if (element == arr[mid]) return mid;
-		else if (element < arr[mid]) end = mid - 1;
-		else start = mid + 1;
+		while (i < n - 1 && a[i] == a[i + 1])
+		{
+			i++;
+		}
+		unique_elements++;
 	}
-	return -1;
+	return unique_elements;
 }
 
 int main()
 {
 	starter();
-	int n;
-	cin >> n;
-	int arr[n];
-	for (int i = 0; i < n; i++)	cin >> arr[i];
-	int element;
-	cin >> element;
-	int ans = binary_search(arr, n, element);
-	cout << ans;
+	test_cases(t)
+	{
+		int n, i;
+		cin >> n;
+		int a[n];
+		for (i = 0; i < n; i++) cin >> a[i];
+		sort(a, a + n);
+		int ans = count_distinct(a, n);
+		if (a[0] == 0)	cout << ans - 1 << endl;
+		else cout << ans << endl;
+	}
 	return 0;
 }
