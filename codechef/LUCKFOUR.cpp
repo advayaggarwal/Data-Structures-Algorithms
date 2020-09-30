@@ -21,12 +21,20 @@ void starter()
 #endif
 }
 
+
 int main()
 {
 	starter();
 	test_cases(t)
 	{
-
+		int n, count = 0;
+		cin >> n;
+		while (n)
+		{
+			if (n % 10 == 4)	count++;
+			n /= 10;
+		}
+		cout << count << endl;
 	}
 	return 0;
 }

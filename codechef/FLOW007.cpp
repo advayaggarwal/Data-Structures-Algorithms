@@ -21,12 +21,22 @@ void starter()
 #endif
 }
 
+
 int main()
 {
 	starter();
 	test_cases(t)
 	{
-
+		int n, reverse_n = 0;
+		cin >> n;
+		int rem;
+		while (n)
+		{
+			rem = n % 10;
+			reverse_n = reverse_n * 10 + rem;
+			n /= 10;
+		}
+		cout << reverse_n << endl;
 	}
 	return 0;
 }

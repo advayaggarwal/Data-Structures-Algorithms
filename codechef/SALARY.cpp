@@ -26,7 +26,17 @@ int main()
 	starter();
 	test_cases(t)
 	{
-
+		int n, i;
+		cin >> n;
+		int total = 0;
+		int salaries[n];
+		for (i = 0; i < n; i++) {
+			cin >> salaries[i];
+			total += salaries[i];
+		}
+		sort(salaries, salaries + n);
+		int ans = total - (salaries[0] * n);
+		cout << ans << endl;
 	}
 	return 0;
 }

@@ -21,12 +21,27 @@ void starter()
 #endif
 }
 
+int count_set_bits(int n)
+{
+	int count = 0;
+	while (n)
+	{
+		if (n & 1)	count++;
+		n = n >> 1;
+	}
+	return count;
+}
+
 int main()
 {
 	starter();
 	test_cases(t)
 	{
-
+		int n;
+		cin >> n;
+		int rem = n % 2048;
+		n /= 2048;
+		cout << count_set_bits(rem) + n << endl;
 	}
 	return 0;
 }

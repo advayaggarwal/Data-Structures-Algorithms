@@ -42,7 +42,7 @@ int countSetBits2(int n)	//Second Method, Time complexity = O(sizeof(int))
 	return count;
 }
 
-int countSetBits_NtoNminus1(int n)
+int countSetBits_NtoNminus1(int n)	//Brian Kernighan’s Algorithm, Time complexity O(log n)
 {
 	int count = 0;
 	while (n)

@@ -21,12 +21,14 @@ void starter()
 #endif
 }
 
+
 int main()
 {
 	starter();
-	test_cases(t)
-	{
-
-	}
+	int x;
+	float y;
+	cin >> x >> y;
+	if (x <= (y - 0.50) && x % 5 == 0)	cout << fixed << setprecision(2) << y - x - 0.50;
+	else cout << fixed << setprecision(2) << y;
 	return 0;
 }

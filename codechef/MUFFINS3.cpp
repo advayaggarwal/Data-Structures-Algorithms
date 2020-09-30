@@ -26,7 +26,10 @@ int main()
 	starter();
 	test_cases(t)
 	{
-
+		int n, package_size = 0;
+		cin >> n;
+		package_size = n / 2 + 1;
+		cout << package_size << endl;
 	}
 	return 0;
 }

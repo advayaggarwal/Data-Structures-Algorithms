@@ -26,7 +26,14 @@ int main()
 	starter();
 	test_cases(t)
 	{
-
+		int n, count = 0, k = 1;
+		cin >> n;
+		while (n / (pow(5, k)))
+		{
+			count += n / pow(5, k);
+			k++;
+		}
+		cout << count << endl;
 	}
 	return 0;
 }

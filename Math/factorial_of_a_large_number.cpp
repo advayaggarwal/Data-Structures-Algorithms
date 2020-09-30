@@ -21,12 +21,12 @@ void starter()
 #endif
 }
 
+
 int main()
 {
 	starter();
-	test_cases(t)
-	{
+	int n;
+	cin >> n;
 
-	}
 	return 0;
 }

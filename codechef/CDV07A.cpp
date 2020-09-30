@@ -21,12 +21,28 @@ void starter()
 #endif
 }
 
+
 int main()
 {
 	starter();
 	test_cases(t)
 	{
+		int n, a, b, cost = 0;
+		cin >> n >> a >> b;
+		char s[n + 1];
+		cin.sync();
+		scanf(" %s" , s);
+		//printf("%s\n", s);
+		int i, j;
+		for (i = 0, j = n - 1; i < n && j >= 0; i++, j--)
+		{
+			if (i == j) break;
+			if (s[j] == '1')	cost += a;
+			if (s[i] == '1')	cost += b;
 
+		}
+		cost += a;
+		cout << cost << endl;
 	}
 	return 0;
 }

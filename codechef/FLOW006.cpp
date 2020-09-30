@@ -21,12 +21,20 @@ void starter()
 #endif
 }
 
+
 int main()
 {
 	starter();
 	test_cases(t)
 	{
-
+		int n, sum = 0;
+		cin >> n;
+		while (n)
+		{
+			sum += n % 10;
+			n /= 10;
+		}
+		cout << sum << endl;
 	}
 	return 0;
 }
