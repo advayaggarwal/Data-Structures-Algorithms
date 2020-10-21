@@ -21,10 +21,10 @@ void starter()
 #endif
 }
 
-void merge(int arr[], int l, int mid, int r, int n)
+void merge(int arr[], int l, int mid, int r)
 {
 	//2 pointer approach
-	int temp[n];
+	int temp[r - l + 1];
 	int i = l;
 	int j = mid + 1;
 	//for temp array
@@ -66,18 +66,18 @@ void merge(int arr[], int l, int mid, int r, int n)
 //Time complexity -> O(nlogn) We are doing logn divisions and for each division we are doing one merge operation which is again O(n), so O(nlogn)
 //Worst Case -> O(nlogn)
 //Best Case -> O(nlogn), we are not checking after division whether it's already sorted or not, so merging it in O(n)
-//Not inplace as space complexity -> O(n), we used temp array with size equal size of arr
+//Not inplace as space complexity -> O(n), we used temp array with max size equal size of arr
 //Stable because at the end we have all single elements at one place and during merge operation we are checking if(arr[i]<=arr[j]) we'll take arr[i]
-void merge_sort(int arr[], int l, int r, int n)
+void merge_sort(int arr[], int l, int r)
 {
 	if (r > l)
 	{
 		int mid = l + (r - l) / 2;
 		//Divide process
-		merge_sort(arr, l, mid, n);
-		merge_sort(arr, mid + 1, r, n);
+		merge_sort(arr, l, mid);
+		merge_sort(arr, mid + 1, r);
 		//Merge process
-		merge(arr, l, mid, r, n);
+		merge(arr, l, mid, r);
 	}
 }
 
@@ -88,7 +88,7 @@ int main()
 	cin >> n;
 	int arr[n];
 	for (i = 0; i < n; i++)	cin >> arr[i];
-	merge_sort(arr, 0, n - 1, n);
+	merge_sort(arr, 0, n - 1);
 	for (i = 0; i < n; i++)	cout << arr[i] << " ";
 	return 0;
 }
