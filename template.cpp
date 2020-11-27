@@ -7,6 +7,8 @@ using namespace std;
 #define mod		1000000007 //1e9+7	ans%mod
 #define ll 	long long
 #define test_cases(x)	int x; cin>>x; while(x--)
+#define vi vector<int>
+#define setbits(x)      __builtin_popcountll(x)
 
 void starter()
 {

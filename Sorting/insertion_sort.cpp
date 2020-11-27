@@ -1,5 +1,5 @@
 /*
-	AUTHOR:			ADVAY AGGARWAL
+	AUTHOR:	ADVAY AGGARWAL
 	INSTITUTION:	IIIT DHARWAD
 */
 #include<bits/stdc++.h>
