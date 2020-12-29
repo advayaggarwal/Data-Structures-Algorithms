@@ -9,6 +9,7 @@ using namespace std;
 #define test_cases(x)	int x; cin>>x; while(x--)
 #define vi vector<int>
 #define setbits(x)      __builtin_popcountll(x)
+#define endl "\n"
 
 void starter()
 {

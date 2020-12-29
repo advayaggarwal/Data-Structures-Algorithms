@@ -39,6 +39,7 @@ int main()
 	starter();
 	int n, d, i;
 	cin >> n >> d;
+	d%=n;
 	int arr[n], temp[d];
 	for (i = 0; i < n; i++)
 	{
