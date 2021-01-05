@@ -55,7 +55,7 @@ bool detect_cycle(Node *head) //O(N+K) = O(n) where N is non-cyclic part and K i
 		fast = fast->next->next;
 		if (slow == fast)	return true;
 	}
-	return false;
+	return false; //there is no cycle
 }
 
 int main()

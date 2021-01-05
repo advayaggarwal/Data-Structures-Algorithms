@@ -55,7 +55,7 @@ Node* detect_cycle(Node *head) //O(N+K) = O(n) where N is non-cyclic part and K 
 		fast = fast->next->next;
 		if (slow == fast)	return slow;
 	}
-	return NULL; //there is not cycle
+	return NULL; //there is no cycle
 }
 
 Node* start_of_loop(Node *p, Node* head)
