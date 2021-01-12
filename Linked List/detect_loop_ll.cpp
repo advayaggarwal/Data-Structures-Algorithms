@@ -45,7 +45,7 @@ void print_ll(Node*head) //O(n) , visiting every node once
 	}
 }
 
-//Tortoise and Hare Algorithm
+//Tortoise and Hare Algorithm OR Floyd's Cycle Detection Algorithm
 bool detect_cycle(Node *head) //O(N+K) = O(n) where N is non-cyclic part and K is cyclic part
 {
 	Node *slow = head, *fast = head;

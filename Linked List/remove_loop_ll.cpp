@@ -59,16 +59,31 @@ Node* detect_cycle(Node *head) //O(N+K) = O(n) where N is non-cyclic part and K 
 	return NULL; //there is no cycle
 }
 
-Node* start_of_loop(Node *fast, Node* head)
+Node* remove_loop(Node *fast, Node *head)
 {
 	if (!fast)	return NULL;
 	Node *slow = head;
-	while (slow != fast)
+	/* No need of slow pointer actually we can also work upon head pointer also because it is pass by value,
+	i.e. we're actually working on the copy of head */
+	if (fast == head) //i.e. loop is from the starting (CORNER CASE)
 	{
-		slow = slow->next;
-		fast = fast->next;
+		while (fast->next != head)
+		{
+			fast = fast->next;
+		}
+		fast->next = NULL;
+		return slow;
 	}
-	return slow;
+	else
+	{
+		while (slow->next != fast->next)
+		{
+			slow = slow->next;
+			fast = fast->next;
+		}
+		fast->next = NULL;
+		return slow->next; //slow to next is pointing to the start of the loop
+	}
 }
 
 int main()
@@ -81,8 +96,17 @@ int main()
 	/*
 		1 -> 2 <-> 3
 	*/
-	//print_ll(head);
-	Node *start = start_of_loop(detect_cycle(head), head);
-	if (start)	cout << start->data;
+	if (detect_cycle(head))
+	{
+		Node *start_of_loop = remove_loop(detect_cycle(head), head);
+		cout << "Loop is starting at " << start_of_loop->data << endl;
+		cout << "Yeah, we removed the loop successfully!! ;) " << endl;
+		print_ll(head);
+	}
+	else
+	{
+		cout << "Fortunately there was no loop :)" << endl;
+		print_ll(head);
+	}
 	return 0;
 }
