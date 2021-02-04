@@ -29,7 +29,18 @@ int main()
 	starter();
 	test_cases(t)
 	{
-
+		int n, x;
+		cin >> n >> x;
+		bool ans = false;
+		for (int i = 1; i <= n; i++)
+		{
+			if (x % i == 0 && x / i <= n)
+			{
+				ans = true;
+				break;
+			}
+		}
+		cout << (ans ? "Yes" : "No") << endl;
 	}
 	return 0;
 }

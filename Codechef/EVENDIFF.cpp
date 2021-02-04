@@ -29,7 +29,17 @@ int main()
 	starter();
 	test_cases(t)
 	{
-
+		int n;
+		cin >> n;
+		int a[n];
+		int e_count = 0, o_count = 0;
+		for (int i = 0; i < n; i++)
+		{
+			cin >> a[i];
+			if (a[i] & 1)	o_count++;
+			else e_count++;
+		}
+		cout << min(e_count, o_count) << endl;
 	}
 	return 0;
 }

@@ -29,7 +29,18 @@ int main()
 	starter();
 	test_cases(t)
 	{
+		int n;
+		cin >> n;
+		int A[n];
+		ll sum = 0;
+		for (int i = 0; i < n; i++)
+		{
+			cin >> A[i];
+			sum += A[i];
+		}
 
+		if (sum & 1)	cout << 2 << endl;
+		else	cout << 1 << endl;
 	}
 	return 0;
 }

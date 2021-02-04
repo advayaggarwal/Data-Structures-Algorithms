@@ -5,7 +5,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define mod		1000000007 //1e9+7	ans%mod
-#define ll 	long long int
+#define ll 	long long
 #define test_cases(x)	int x; cin>>x; while(x--)
 #define vi vector<int>
 #define setbits(x)      __builtin_popcountll(x)
@@ -29,6 +29,17 @@ int main()
 	starter();
 	test_cases(t)
 	{
+		int n;
+		cin >> n;
+		int x, y;
+		if (n < 2020)	cout << "NO" << endl;
+		else
+		{
+			x = n / 2020;
+			y = n - (2020 * x);
+			if (x - y >= 0)	cout << "YES" << endl;
+			else cout << "NO" << endl;
+		}
 
 	}
 	return 0;

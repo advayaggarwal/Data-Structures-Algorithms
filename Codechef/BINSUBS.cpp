@@ -29,7 +29,40 @@ int main()
 	starter();
 	test_cases(t)
 	{
+		int n;
+		cin >> n;
+		cin.ignore();
+		string s;
+		cin >> s;
+		int ones[n] = {0};
+		int one_so_far = 0;
+		int zero_so_far = 0;
+		int zeroes[n] = {0};
 
+		for (int i = 0; i < n; i++)
+		{
+			ones[i] = one_so_far;
+			if (s[i] == '1')
+			{
+				one_so_far++;
+			}
+		}
+
+		for (int i = n - 1;  i >= 0; i--)
+		{
+			zeroes[i] = zero_so_far;
+			if (s[i] == '0')
+			{
+				zero_so_far++;
+			}
+		}
+
+		int min = INT_MAX;
+		for (int i = 0; i < n; i++)
+		{
+			if (zeroes[i] + ones[i] < min)	min = zeroes[i] + ones[i];
+		}
+		cout << min << endl;
 	}
 	return 0;
 }

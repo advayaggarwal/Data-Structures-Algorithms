@@ -29,7 +29,18 @@ int main()
 	starter();
 	test_cases(t)
 	{
+		int n, k;
+		cin >> n >> k;
+		while (k % 2 == 0)	k /= 2;
+		int a[n];
+		int flag = 0;
+		for (int i = 0; i < n; i++)
+		{
+			cin >> a[i];
+			if (a[i] % k != 0)	flag = 1;
+		}
 
+		cout << (flag == 0 ? "YES" : "NO") << endl;
 	}
 	return 0;
 }
