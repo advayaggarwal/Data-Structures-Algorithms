@@ -1,0 +1,102 @@
+/*
+	AUTHOR:			ADVAY AGGARWAL
+	INSTITUTION:	IIIT DHARWAD
+*/
+#include<bits/stdc++.h>
+using namespace std;
+#define mod		1000000007 //1e9+7	ans%mod
+#define ll 	long long int
+#define test_cases(x)	int x; cin>>x; while(x--)
+#define vi vector<int>
+#define setbits(x)      __builtin_popcountll(x)
+#define endl "\n"
+
+void starter()
+{
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+#ifndef ONLINE_JUDGE
+	//for getting input from input.txt
+	freopen("input.txt", "r", stdin);
+	//for writing output to output.txt
+	freopen("output.txt", "w", stdout);
+#endif
+}
+
+int main()
+{
+	starter();
+	test_cases(t)
+	{
+		int n, u, r, d, l;
+		cin >> n >> u >> r >> d >> l;
+		if (u <= (n - 2) && r <= (n - 2) && d <= (n - 2) && l <= (n - 2))	cout << "YES" << endl;
+		else
+		{
+			int um = 0, dm = 0, rm = 0, lm = 0;
+			if (u > n - 2)
+			{
+				if (u == n)
+				{
+					um = n;
+					rm++;
+					lm++;
+				}
+				else
+				{
+					if (r >= l)	rm++;
+					else lm++;
+				}
+			}
+
+			if (d > n - 2)
+			{
+				if (d == n)
+				{
+					dm = n;
+					rm++;
+					lm++;
+				}
+				else
+				{
+					if (r >= l)	rm++;
+					else lm++;
+				}
+			}
+			if (r > n - 2)
+			{
+				if (r == n)
+				{
+					rm = n;
+					um++;
+					dm++;
+				}
+				else
+				{
+					if (u >= d && um != n)	um++;
+					else dm++;
+				}
+			}
+			if (l > n - 2)
+			{
+				if (l == n)
+				{
+					lm = n;
+					um++;
+					dm++;
+				}
+				else
+				{
+					if (u >= d && um != n)	um++;
+					else dm++;
+				}
+			}
+
+			if (u <= um && d <= dm && r <= rm && l <= lm)	cout << "YES" << endl;
+			else cout << "NO" << endl;
+
+		}
+	}
+	return 0;
+}

@@ -11,19 +11,23 @@ using namespace std;
 #define setbits(x)      __builtin_popcountll(x)
 #define endl "\n"
 
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
+const int N = 1e6 + 7;
+vi prime(N, 1);
 
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
+void sieve()
+{
+	for (int i = 0; i < N; i++)	prime[i] = i;
+	for (int i = 2; i * i < N; i++)
+	{
+		if (prime[i] == i)
+		{
+			for (int j = i * i; j < N; j += i)
+			{
+				if (prime[j] == j) prime[j] = i;
+			}
+		}
+	}
+}
 
 void starter()
 {
@@ -38,12 +42,23 @@ void starter()
 #endif
 }
 
+//Time complexity - O(Nlog(logN)) + O(T*logN)
+//						sieve        queries
+
 int main()
 {
 	starter();
+	sieve(); //O(Nlog(logN))
 	test_cases(t)
 	{
-
+		int n;
+		cin >> n;
+		while (n > 1) //O(logn)
+		{
+			cout << prime[n] << " ";
+			n /= prime[n];
+		}
+		cout << endl;
 	}
 	return 0;
 }

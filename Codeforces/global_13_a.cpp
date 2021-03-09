@@ -11,20 +11,6 @@ using namespace std;
 #define setbits(x)      __builtin_popcountll(x)
 #define endl "\n"
 
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
 void starter()
 {
 	ios::sync_with_stdio(0);
@@ -41,9 +27,40 @@ void starter()
 int main()
 {
 	starter();
-	test_cases(t)
+	int n, q;
+	cin >> n >> q;
+	vi a(n);
+	int ones = 0, zeroes = 0;
+	for (int i = 0; i < n; i++)
 	{
-
+		cin >> a[i];
+		if (a[i] == 1)	ones++;
+		else zeroes++;
+	}
+	while (q--)
+	{
+		int t, x;
+		cin >> t >> x;
+		if (t == 1)
+		{
+			if (a[x - 1] == 1)
+			{
+				ones--;
+				zeroes++;
+				a[x - 1] = 0;
+			}
+			else
+			{
+				ones++;
+				zeroes--;
+				a[x - 1] = 1;
+			}
+		}
+		else
+		{
+			if (x > ones)	cout << 0 << endl;
+			else cout << 1 << endl;
+		}
 	}
 	return 0;
 }

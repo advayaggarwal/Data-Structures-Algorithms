@@ -11,20 +11,6 @@ using namespace std;
 #define setbits(x)      __builtin_popcountll(x)
 #define endl "\n"
 
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
 void starter()
 {
 	ios::sync_with_stdio(0);
@@ -43,7 +29,36 @@ int main()
 	starter();
 	test_cases(t)
 	{
+		int px, py;
+		cin >> px >> py;
+		string s;
+		cin >> s;
+		int d[5] = {0};
+		//1-L 2-R 3-U 4-D
+		for (int i = 0; i < int(s.size()); i++)
+		{
+			if (s[i] == 'L')	d[1]++;
+			else if (s[i] == 'R')	d[2]++;
+			else if (s[i] == 'U')	d[3]++;
+			else	d[4]++;
+		}
+		int flagx = px > 0 ? 1 : 0;
+		int flagy = py > 0 ? 1 : 0;
+		bool ans = false;
+		if ((((flagx) && (d[2] >= px)) || ((!flagx) && (d[1] >= (-1 * px)))) && (((flagy) && (d[3] >= py)) || ((!flagy && d[4] >= (-1 * py)))))
+		{
+			ans = true;
+		}
 
+		if (ans)	cout << "YES" << endl;
+		else cout << "NO" << endl;
 	}
 	return 0;
 }
+
+
+
+
+
+
+
