@@ -10,21 +10,6 @@ using namespace std;
 #define vi vector<int>
 #define setbits(x)      __builtin_popcountll(x)
 #define endl "\n"
-#define pb push_back
-
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
 
 void starter()
 {
@@ -44,7 +29,14 @@ int main()
 	starter();
 	test_cases(t)
 	{
+		int n, m;
+		ll x, i, j;
+		cin >> n >> m >> x;
+		j = (x % n == 0) ? x / n : (x / n) + 1;
+		i = x - ((j - 1) * n);
 
+		ll ans = (i - 1) * m + j;
+		cout << ans << endl;
 	}
 	return 0;
 }

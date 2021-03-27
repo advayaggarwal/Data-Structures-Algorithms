@@ -22,7 +22,7 @@ public:
         return mx;
     }
 
-    vector<int> nsr(vector<int>arr, int n)
+    vector<int> nsr(vector<int>&arr, int n)
     {
         stack<pair<int, int>>s;
         vector<int>v;
@@ -43,7 +43,7 @@ public:
         return v;
     }
 
-    vector<int> nsl(vector<int>arr, int n)
+    vector<int> nsl(vector<int>&arr, int n)
     {
         stack<pair<int, int>>s; //{element,index}
         vector<int> v;
@@ -62,7 +62,7 @@ public:
         return v;
     }
 
-    int mah(vector<int> arr)
+    int mah(vector<int>& arr)
     {
         vector<int> right_index = nsr(arr, arr.size());
         vector<int> left_index = nsl(arr, arr.size());
