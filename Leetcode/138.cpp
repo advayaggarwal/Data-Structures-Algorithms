@@ -57,3 +57,52 @@ public:
     }
 
 };
+
+
+//Same soln, just submitted at different times :)
+
+//Time complexity - O(n)
+//Space complexity - O(1)
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+
+        if (!head)   return NULL;
+
+        Node *temp = head;
+        //copy nodes
+
+        while (temp)
+        {
+            Node *p = new Node(temp->val);
+            Node *next  = temp->next;
+            temp->next  = p;
+            p->next = next;
+            temp = next;
+        }
+
+        temp = head;
+        //Assigning random pointers
+        while (temp)
+        {
+            if (temp->random) temp->next->random = temp->random->next;
+            temp = temp->next->next;
+        }
+
+        //Segregating both the lists
+
+        Node *copy_head = head->next;
+        temp = head;
+        while (temp)
+        {
+            Node *p = temp->next;
+            temp->next = temp->next->next;
+            if (p->next) p->next = p->next->next;
+            temp = temp->next;
+
+        }
+
+        return copy_head;
+
+    }
+};

@@ -28,13 +28,20 @@ void solve(string ip, string op)
 		cout << "\"" << op << "\"" << endl ;
 		return;
 	}
-	string op1 = op;
-	string op2 = op;
-	op2.push_back(ip[0]);
-	ip.erase(ip.begin() + 0);
-	solve(ip, op1);
-	solve(ip, op2);
+	solve(ip.substr(1), op);
+	solve(ip.substr(1), op+ip[0]);
 	return;
+}
+
+void printSubseq(string s, int i, string op)
+{
+	if(i==s.size())
+	{
+		cout<<op<<endl;
+		return;
+	}
+	printSubseq(s,i+1,op);
+	printSubseq(s,i+1,op+s[i]);
 }
 
 int main()

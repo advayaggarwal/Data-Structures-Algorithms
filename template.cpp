@@ -26,6 +26,20 @@ struct custom_hash {
     }
 };
 
+
+template <typename Type>
+istream &operator>>(istream &in, vector<Type> &vec){
+	int n = vec.size();
+	for(int i=0; i<n; i++)	in>>vec[i];
+	return in;
+}
+
+template <typename Type>
+ostream &operator<<(ostream &out, vector<Type> &vec){
+	for(auto &val : vec)	out<<val<<" ";
+	return out;
+}
+
 void starter()
 {
 	ios::sync_with_stdio(0);

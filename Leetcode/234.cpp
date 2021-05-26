@@ -8,6 +8,10 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
+
+//Time complexity - O(n)
+//Space complexity - O(1)
 class Solution {
 public:
 	bool isPalindrome(ListNode* head) {
@@ -27,8 +31,7 @@ public:
 				head1 = slow->next;
 				break;
 			}
-			//first check is fast is not null, that is if fast is null then fast->next will throw null point exception
-			if (fast && !fast->next) //length of linked list is odd, therefore discard the middle one
+			if (!fast->next) //length of linked list is odd, therefore discard the middle one
 			{
 				head1 = slow->next->next;
 				break;
@@ -51,15 +54,96 @@ public:
 		//Step 3 - Compare both the linked lists
 		while (head && head1)
 		{
-			if (head->val != head1->val) break;
+			if (head->val != head1->val) return false;
 			head = head->next;
 			head1 = head1->next;
 		}
 
-		if (!head && !head1) // Both points to null, that is while loop doesn't encounter break statement
+		return true;
+	}
+};
+
+
+//Time complexity - O(n)
+//Space complexity - O(1)
+class Solution {
+public:
+	bool isPalindrome(ListNode* head) {
+		if (!head || !head->next)   return true;
+
+		ListNode *slow = head, *fast = head->next; //if we initialise fast as head->next then it will give 1st middle in case of even length, in odd length list both will be same
+
+		//Finding middle of the linked list
+		while (fast && fast->next)
 		{
-			return true;
+			fast = fast->next->next;
+			slow = slow->next;
 		}
-		else return false;
+
+		//Reverse the second half
+		slow->next = reverse(slow->next);
+
+		slow = slow->next;
+		fast = head;
+		//Comparing both the halves
+		while (slow)
+		{
+			if (fast->val != slow->val)  return false;
+			fast = fast->next;
+			slow = slow->next;
+		}
+		return true;
+	}
+
+
+	ListNode* reverse(ListNode *head)
+	{
+		ListNode *prev = NULL;
+
+		while (head)
+		{
+			ListNode *nextNode = head->next;
+			head->next = prev;
+			prev = head;
+			head = nextNode;
+		}
+
+		return prev;
+	}
+};
+
+
+
+//Recursive
+
+/* There are 2 disadvantages however:
+1. It's using O(n) memory due to the recursive calls' stack.
+2. The element by element comparison continues past the middle of the list, which is wasteful.
+
+Explanation
+..........................................................................................
+Example :
+1-> 2-> 3-> 4-> 2-> 1
+
+temp points 1 initially.
+Make recursive calls until you reach the last element - 1.
+On returning from each recurssion, check if it is equal to temp values.
+temp values are updated to on each recurssion.
+So first check is temp 1 -  end 1
+Second temp 2 - second last 2 ...and so on. */
+
+class Solution {
+public:
+	ListNode* temp;
+	bool isPalindrome(ListNode* head) {
+		temp = head;
+		return check(head);
+	}
+
+	bool check(ListNode* p) {
+		if (NULL == p) return true;
+		bool isPal = check(p->next) & (temp->val == p->val);
+		temp = temp->next;
+		return isPal;
 	}
 };

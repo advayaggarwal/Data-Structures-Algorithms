@@ -26,38 +26,38 @@ void starter()
 
 vi nsl(int arr[], int n) //Nearest smaller to left
 {
-	stack<pair<int, int>>s; //{element, index}
+	stack<int>s; //{index}
 	vi v;
 	for (int i = 0; i < n; i++)
 	{
 		if (s.size() == 0)	v.push_back(-1);
-		else if (s.top().first < arr[i])	v.push_back(s.top().second);
+		else if (arr[s.top()] < arr[i])	v.push_back(s.top());
 		else
 		{
-			while (s.size() != 0 && s.top().first >= arr[i])	s.pop();
+			while (s.size() != 0 && arr[s.top()] >= arr[i])	s.pop();
 			if (s.size() == 0)	v.push_back(-1);
-			else v.push_back(s.top().second);
+			else v.push_back(s.top());
 		}
-		s.push({arr[i], i});
+		s.push(i);
 	}
 	return v;
 }
 
 vi nsr(int arr[], int n) //Nearest smaller to right
 {
-	stack<pair<int, int>>s; //{element, index}
+	stack<int>s; //{index}
 	vi v;
 	for (int i = n - 1; i >= 0; i--)
 	{
 		if (s.size() == 0)	v.push_back(n);
-		else if (s.top().first < arr[i])	v.push_back(s.top().second);
+		else if (arr[s.top()] < arr[i])	v.push_back(s.top());
 		else
 		{
-			while (s.size() != 0 && s.top().first >= arr[i])	s.pop();
+			while (s.size() != 0 && arr[s.top()] >= arr[i])	s.pop();
 			if (s.size() == 0)	v.push_back(n);
-			else v.push_back(s.top().second);
+			else v.push_back(s.top());
 		}
-		s.push({arr[i], i});
+		s.push(i);
 	}
 	reverse(v.begin(), v.end());
 	return v;
