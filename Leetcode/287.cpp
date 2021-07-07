@@ -1,3 +1,31 @@
+//Approach 1 - Sorting
+//Time complexity - O(nlogn)
+//Space complexity - O(1)
+
+
+
+//Approach 2
+//Time complexity - O(n)
+//Space complexity - O(n)
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        int n = nums.size();
+        set<int>s;
+        for (int i = 0; i < n; i++)
+        {
+            if (s.find(nums[i]) != s.end())    return nums[i];
+            else s.insert(nums[i]);
+        }
+
+        return -1;
+    }
+};
+
+
+//Approach 3
+//Time complexity - O(n)
+//Space complexity - O(1)
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
@@ -14,8 +42,11 @@ public:
 };
 
 
-// Slow and Fast pointer, Floyd's Algo
 
+//Approach 4
+// Slow and Fast pointer, Floyd's Algo
+//Time complexity - O(n)
+//Space complexity - O(1)
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
@@ -42,3 +73,5 @@ public:
         return slow;
     }
 };
+
+

@@ -1,7 +1,7 @@
 /*
 	AUTHOR:			ADVAY AGGARWAL
-	INSTITUTION:	IIIT DHARWAD
 */
+
 #include<bits/stdc++.h>
 using namespace std;
 #define mod		1000000007 //1e9+7	ans%mod
@@ -25,7 +25,6 @@ struct custom_hash {
         return splitmix64(x + FIXED_RANDOM);
     }
 };
-
 
 template <typename Type>
 istream &operator>>(istream &in, vector<Type> &vec){

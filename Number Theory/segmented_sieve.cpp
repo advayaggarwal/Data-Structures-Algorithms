@@ -1,6 +1,5 @@
 /*
 	AUTHOR:			ADVAY AGGARWAL
-	INSTITUTION:	IIIT DHARWAD
 */
 #include<bits/stdc++.h>
 using namespace std;
@@ -28,7 +27,7 @@ void starter()
 
 map<int, bool>is_prime;
 
-void segmented_sieve_with_map(ll l, ll r) //Time complecity - O(((r−l+1)log(r)+root(r))*log(r-l+1)) Additional log(r-l+1) due to map
+void segmented_sieve_with_map(ll l, ll r) //Time complexity - O(((r−l+1)log(r)+root(r))*log(r-l+1)) Additional log(r-l+1) due to map
 {
 	for (ll i = l; i <= r; i++)	is_prime[i] = true;
 	for (ll i = 2; i * i <= r; i++)
@@ -42,7 +41,7 @@ void segmented_sieve_with_map(ll l, ll r) //Time complecity - O(((r−l+1)log(r)
 	if (l == 1)	is_prime[1] = false;
 }
 
-vector<bool> segmented_sieve_without_map(ll l, ll r) // Time complecity - O((r−l+1)loglog(r)+root(r))
+vector<bool> segmented_sieve_without_map(ll l, ll r) // Time complexity - O((r−l+1)loglog(r)+root(r))
 {
 	vector<bool> is_prime(r - l + 1, true);
 	for (ll i = 2; i * i <= r; i++)

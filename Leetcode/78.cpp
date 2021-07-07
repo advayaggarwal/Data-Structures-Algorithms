@@ -20,7 +20,7 @@ public:
 };
 
 
-//Recursion
+//Recursion and Backtracking
 
 class Solution {
 public:
@@ -34,6 +34,7 @@ public:
         }
 
         helper(i + 1, nums, output); //don't take the ith element
+
         output.push_back(nums[i]);
         helper(i + 1, nums, output); //take the ith element
         output.pop_back(); //Backtracking step

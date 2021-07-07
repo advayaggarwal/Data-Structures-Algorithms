@@ -1,6 +1,2 @@
-5
-racecar
-naman
-acd
-madam
-coding
+5 8
+1 2 3 4 5

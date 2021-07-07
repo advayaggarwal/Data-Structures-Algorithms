@@ -29,7 +29,6 @@ public:
             p = p->next;
             if (temp->next) temp = temp->next->next;
             else break;
-
         }
 
         temp = head->next;
@@ -39,7 +38,6 @@ public:
             p = p->next;
             if (temp->next) temp = temp->next->next;
             else break;
-
         }
 
         return reordered_head;
@@ -61,7 +59,6 @@ public:
         ListNode *even = head->next;
         while (even && even->next)
         {
-
             odd->next = even->next;
             odd = odd->next;
 
