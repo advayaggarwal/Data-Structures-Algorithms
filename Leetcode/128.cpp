@@ -57,7 +57,7 @@ necessarily be part of a longer sequence. */
 Although the time complexity appears to be quadratic due to the while loop nested within the for loop, closer inspection reveals it
 to be linear. Because the while loop is reached only when currentNum marks the beginning of a sequence
 (i.e. currentNum-1 is not present in nums), the while loop can only run for nn iterations throughout the entire runtime of the algorithm.
-This means that despite looking like O(n \cdot n)O(n⋅n) complexity, the nested loops actually run in O(n + n) = O(n)O(n+n)=O(n) time.
+This means that despite looking like O(n*n) complexity, the nested loops actually run in O(n + n) = O(n) time.
 All other computations occur in constant time, so the overall runtime is linear.
 */
 
@@ -75,7 +75,7 @@ public:
 
         for (int &num : nums)
         {
-            if (hash.find(num - 1) == hash.end())
+            if (hash.find(num - 1) == hash.end()) //Beginning of the sequence
             {
                 int currentNum = num;
                 int currentStreak = 1;

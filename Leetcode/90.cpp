@@ -1,6 +1,7 @@
 // Idea is if we ignore some x, then ignore all x in the vector, for that, first we have to sort the vector, to make
 // all the duplicates adjacent
-// Else everything is same as Subset
+// Else everything is same as Subset I
+
 
 class Solution {
 public:
@@ -24,7 +25,7 @@ public:
 
         helper(i + 1, nums, temp , ans, false);
 
-        if (i > 0 && nums[i] == nums[i - 1] && !prev_taken)  return; //both the no are same, and previously we ignored it,
+        if (i > 0 && nums[i] == nums[i - 1] && !prev_taken)  return; //both the number are same, and previously we ignored it,
         //so have to ignore now also
 
         temp.push_back(nums[i]);

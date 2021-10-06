@@ -10,7 +10,7 @@ using namespace std;
 #define vi vector<int>
 #define setbits(x)      __builtin_popcountll(x)
 #define endl "\n"
-
+#define vvi vector<vi>
 
 template <typename Type>
 istream &operator>>(istream &in, vector<Type> &vec) {
@@ -35,67 +35,65 @@ void starter()
 
 // //Recursion
 // //Time complexity - O(2^n)
-// //Space complexity - O(1)
+// //Space complexity - O(n)
 int Knapsack(vi &value, vi &weight, int W, int n)
 {
 	if (n == 0 || W == 0)	return 0;
 
+	int inc = 0, exc = 0;
+
 	if (weight[n - 1] <= W)
 	{
-		return max(Knapsack(value, weight, W, n - 1), value[n - 1] + Knapsack(value, weight, W - weight[n - 1], n - 1));
+		inc = value[n - 1] + Knapsack(value, weight, W - weight[n - 1], n - 1);
 	}
 
-	else
-	{
-		return Knapsack(value, weight, W, n - 1);
-	}
+	exc = Knapsack(value, weight, W, n - 1);
+
+	return max(inc, exc);
 }
 
 //Recursion with Memoization
 //Time complexity - O(n*W)
 //Space complexity - O(n*W)
-int KnapsackMemoization(vi &value, vi &weight, int W, int n, vector<vi>dp) //TOP DOWN
+int KnapsackTD(vi &value, vi &weight, int W, int n, vector<vi>dp) //TOP DOWN
 {
-	if (n == 0 || W == 0)
-	{
-		dp[n][W] = 0;
-		return 0;
-	}
+	if (n == 0 || W == 0)	return 0;
 
 	if (dp[n][W] != -1)	return dp[n][W];
 
+	int inc = 0, exc = 0;
+
 	if (weight[n - 1] <= W)
 	{
-		return dp[n][W] = max(KnapsackMemoization(value, weight, W, n - 1, dp), value[n - 1] + KnapsackMemoization(value, weight, W - weight[n - 1], n - 1, dp));
+		inc = value[n - 1] + KnapsackTD(value, weight, W - weight[n - 1], n - 1, dp);
 	}
 
-	else
-	{
-		return dp[n][W] = KnapsackMemoization(value, weight, W, n - 1, dp);
-	}
+	exc = KnapsackTD(value, weight, W, n - 1, dp);
+
+	return dp[n][W] = max(inc, exc);
 }
 
 
 //Iterative DP
 //Time complexity - O(n*W)
 //Space complexity - O(n*W)
-int KnapsackTabulation(vi &value, vi &weight, int W, int n, vector<vi>dp) //BOTTOM UP
+int KnapsackBU(vi &value, vi &weight, int W, int n) //BOTTOM UP
 {
-	for (int i = 0; i <= n; i++)
+	vvi dp(n + 1, vi(W + 1, 0)); //dp[i][j] represents max profit we can get if we have 1st i items and capacity of Knapsack is j
+	for (int i = 1; i <= n; i++)
 	{
-		for (int w = 0; w <= W; w++)
+		for (int w = 1; w <= W; w++)
 		{
-			if (i == 0 || w == 0)	dp[i][w] = 0;
+			int inc = 0, exc = 0;
 
-			else if (weight[i - 1] <= w)
+			if (weight[i - 1] <= w)
 			{
-				dp[i][w] = max(value[i - 1] + dp[i - 1][w - weight[i - 1]], dp[i - 1][w]);
+				inc = value[i - 1] + dp[i - 1][w - weight[i - 1]];
 			}
 
-			else
-			{
-				dp[i][w] = dp[i - 1][w];
-			}
+			exc = dp[i - 1][w];
+
+			dp[i][w] = max(inc, exc);
 		}
 	}
 
@@ -126,17 +124,20 @@ int KnapsackTabulationReducedSpace(vi &value, vi &weight, int W, int n, vi K) //
 int main()
 {
 	starter();
-	int n;
-	cin >> n;
+	int n, W;
+	cin >> n >> W;
 	vi value(n), weight(n);
 	cin >> value >> weight;
-	int W;
-	cin >> W;
+
 	cout << Knapsack(value, weight, W, n) << endl;
+
 	vector<vi>dp(n + 1, vi(W + 1, -1));
-	cout << KnapsackMemoization(value, weight, W, n, dp) << endl;
-	cout << KnapsackTabulation(value, weight, W, n, dp) << endl;
+	cout << KnapsackTD(value, weight, W, n, dp) << endl;
+
+	cout << KnapsackBU(value, weight, W, n) << endl;
+
 	vi K(W + 1, 0);
-	cout << KnapsackTabulationReducedSpace(value, weight, W, n, K) << endl;
+	cout << KnapsackTabulationReducedSpace(value, weight, W, n, K);
+
 	return 0;
 }

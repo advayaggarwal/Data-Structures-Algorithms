@@ -58,6 +58,7 @@ bool isSafe(vector<string>&temp, int row, int col, int n) //O(n)
 	return true;
 }
 
+//Time complexity - O(n^n)
 void n_queens(int row, int n, vector<string>&temp, vector<vector<string>>&res)
 {
 	if (row == n)
@@ -104,7 +105,7 @@ int main()
 /*
 
 //Above code can be optimised by using hashing, we don't have to use isSafe(), it is taking O(n), we can use vectors to mark
-//if the current column and upper diagonals are already filled.
+//if the current column and upper diagonals are already filled, thereby reducing complexity to O(1)
 //Watch striver's video for explanation
 
 void n_queens(int row, int n, vector<string>&temp, vi &col_filled, vi &upper_left_diagonal_filled, vi &upper_right_diagonal_filled, vector<vector<string>>&res)

@@ -1,14 +1,3 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-
 //Merge with divide and conquer
 //We have merge in pairs (first,last), (second, last second), and so on... and store their respective results in the first member of each pair
 

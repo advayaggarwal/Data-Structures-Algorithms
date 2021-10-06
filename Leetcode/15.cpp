@@ -1,7 +1,6 @@
 //Hash map
 //Time complexity - O(n^2 * logm), m is the no. of unique triplets, s.find(v) and s.insert(v) will take O(logm) complexity
-//Space complexity - O(m), again m is the no. of unique triplets
-
+//Space complexity - O(m + n), again m is the no. of unique triplets, n is for unordered_map
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
@@ -41,7 +40,7 @@ public:
 
 //2 Pointer approach
 //Time complexity - O(n^2)
-
+//Space complexity - O(1)
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
@@ -52,7 +51,8 @@ public:
 
         for (int i = 0; i < n; i++)
         {
-            if (nums[i] > 0)   continue; //As if nums[i] is greater than 0 then all elements right to i will also be greater than 0 so their's sum can't be 0
+            if (nums[i] > 0)   break; //As if nums[i] is greater than 0 then all elements right to i will also be greater than 0 so their's sum can't be 0
+
             if (i == 0 || (i > 0 && nums[i] != nums[i - 1])) //To remove duplicates
             {
                 int low = i + 1, high = n - 1, target_sum = -nums[i];
@@ -60,7 +60,9 @@ public:
                 while (low < high)
                 {
                     if (nums[low] + nums[high] < target_sum) low++;
+
                     else if (nums[low] + nums[high] > target_sum) high--;
+
                     else
                     {
                         vector<int>triplet = {nums[i], nums[low], nums[high]};

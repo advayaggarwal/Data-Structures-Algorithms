@@ -1,22 +1,22 @@
+//Time complexity - O(n)
+//Space complexity - O(n)
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int, int>m; //{element,index}
-        vector<int> res;
+
         int n = nums.size();
+        unordered_map<int, int>m;
+
         for (int i = 0; i < n; i++)
         {
-            auto it = m.find(target - nums[i]);
-
-            if (it != m.end() && it->second != i)
+            if (m.find(target - nums[i]) != m.end())
             {
-                res.push_back(it->second);
-                res.push_back(i);
-                return res;
+                return {i, m[target - nums[i]]};
             }
 
             m[nums[i]] = i;
         }
-        return res;
+
+        return {};
     }
 };

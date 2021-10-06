@@ -1,4 +1,3 @@
-
 /*
 	AUTHOR:			ADVAY AGGARWAL
 */
@@ -196,7 +195,8 @@ void inOrderTrick(Node *root)
 int main()
 {
 	starter();
-	string s = "1 2 3 4 5 N 6"; //fill string level by level, and for NULL put N
+	string s; //fill string level by level, and for NULL put N
+	getline(cin, s);
 	Node* root = buildTree(s);
 	inOrder(root);
 	cout << endl;

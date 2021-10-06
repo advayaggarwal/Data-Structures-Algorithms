@@ -123,24 +123,6 @@ Node* buildTree(string str)
 }
 
 
-void levelOrder(Node *root)
-{
-	if (!root)	return;
-
-	queue<Node*>q;
-	q.push(root);
-
-	while (!q.empty())
-	{
-		Node *temp = q.front();
-		q.pop();
-		cout<<temp->val<<" ";
-
-		if (temp->left)	q.push(temp->left);
-		if (temp->right)	q.push(temp->right);
-	}
-
-}
 
 /*
 
@@ -155,7 +137,7 @@ void levelOrder(Node *root)
 int main()
 {
 	starter();
-	string s; //fill string level by level, and for NULL put N eg:- 1 2 3 4 5 N 6
+	string s; //fill string level by level, and for NULL put N, eg 1 2 3 4 5 N 6
 	getline(cin,s);
 	Node* root = buildTree(s);
 	

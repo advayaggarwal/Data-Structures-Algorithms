@@ -30,7 +30,7 @@ int partition(int arr[], int low, int high)
 		if (arr[j] <= pivot)
 		{
 			pi++;
-			//swap(arr[i],arr[j])
+			//swap(arr[pi],arr[j])
 			int temp = arr[j];
 			arr[j] = arr[pi];
 			arr[pi] = temp;

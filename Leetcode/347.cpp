@@ -65,6 +65,42 @@ public:
   }
 };
 
+
+#define pii pair<int,int>
+class Solution {
+public:
+  vector<int> topKFrequent(vector<int>& v, int k) {
+    int n = v.size();
+
+    vector<int>res;
+    unordered_map<int, int>m; //{element, freq}
+
+    for (int i = 0; i < n; i++) m[v[i]]++;
+
+    priority_queue<pii, vector<pii>, greater<pii>>minHeap;
+
+    for (auto p : m)
+    {
+      minHeap.push({p.second, p.first});//because sorting is done on the basis of first,
+      //otherwise we had to make a custom comparator
+
+      if (minHeap.size() > k) minHeap.pop();
+    }
+
+    //Now Min Heap contains top k frequent elements
+
+    while (!minHeap.empty())
+    {
+      res.push_back(minHeap.top().second);
+      minHeap.pop();
+    }
+
+    return res;
+  }
+};
+
+
+
 //Bucket Sort
 //Time complexity - O(N)
 class Solution {
@@ -92,6 +128,4 @@ public:
 
     return res;
   }
-
-
 };

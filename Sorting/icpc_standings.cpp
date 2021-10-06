@@ -37,7 +37,7 @@ bool compare(pair<string, int>a, pair<string, int>b)
 	return a.second < b.second;
 }
 
-/*int badness(vector<pair<string, int>> &teams) //O(nlogn)
+int badness(vector<pair<string, int>> &teams) //O(nlogn)
 {
 	sort(teams.begin(), teams.end(), compare);
 	int ans = 0;
@@ -51,8 +51,9 @@ bool compare(pair<string, int>a, pair<string, int>b)
 		last_rank++;
 	}
 	return ans;
-}*/
+}
 
+/*
 int badness(vector<pair<string, int>> &teams) //O(n)
 {
 	int n = teams.size();
@@ -72,6 +73,7 @@ int badness(vector<pair<string, int>> &teams) //O(n)
 	}
 	return ans;
 }
+*/
 
 int main()
 {

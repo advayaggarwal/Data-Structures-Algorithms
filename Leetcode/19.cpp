@@ -1,14 +1,3 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-
 //Time complexity - O(n) One pass solution, without computing length
 //Space complexity - O(1)
 class Solution {
@@ -58,9 +47,9 @@ public:
         ListNode *dummy = new ListNode(0);
         dummy->next = head;
         ListNode *slow = dummy, *fast = dummy;
-        for (int i = 1; i <= n + 1; i++)   fast = fast->next; //as fast is initially at dummy therefore it should move n+1 steps ahead
+        for (int i = 1; i <= n; i++)   fast = fast->next;
 
-        while (fast)
+        while (fast->next) //fast will point to the last node of linked list
         {
             fast = fast->next;
             slow = slow->next;

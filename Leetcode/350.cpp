@@ -1,6 +1,6 @@
 //Time complexity - O(nlogn + mlogm)
 //Space complexity - O(1), not considering output vector
-// 2 pointer approach
+// 2 pointer approach and Sorting
 class Solution {
 public:
     vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
@@ -55,5 +55,34 @@ public:
 
         return res;
 
+    }
+};
+
+
+//Time complexity - O(n+m)
+//Space complexity - O(n)
+class Solution {
+public:
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        vector<int>freq(1005, 0);
+
+        vector<int>res;
+        int m = nums1.size(), n = nums2.size();
+
+        for (int i = 0; i < m; i++)
+        {
+            freq[nums1[i]]++;
+        }
+
+        for (int i = 0; i < n; i++)
+        {
+            if (freq[nums2[i]] != 0)
+            {
+                res.push_back(nums2[i]);
+                freq[nums2[i]]--;
+            }
+        }
+
+        return res;
     }
 };

@@ -64,6 +64,44 @@ void optimised(int arr[], int n) //Time complexity - O(n), Space complexity - O(
 	for (auto ele : v)	cout << ele << " ";
 }
 
+void nge(int arr[], int n) //Same as above but with less code
+{
+	vi nge(n);
+	stack<int>s;
+
+	for (int i = n - 1; i >= 0; i--)
+	{
+		while (!s.empty() and s.top() <= arr[i])	s.pop();
+
+		if (s.empty())	nge[i] = -1;
+		else nge[i] = s.top();
+
+		s.push(arr[i]);
+
+	}
+
+	for (int x : nge)	cout << x << " ";
+}
+
+void nge_circular(int arr[], int n) //Just run loop from 2*n-1 and do i%n instead of i
+{
+	vi nge(n);
+	stack<int>s;
+
+	for (int i = 2 * n - 1; i >= 0; i--)
+	{
+		while (!s.empty() and s.top() <= arr[i % n])	s.pop();
+
+		if (s.empty())	nge[i % n] = -1;
+		else nge[i % n] = s.top();
+
+		s.push(arr[i % n]);
+
+	}
+
+	for (int x : nge)	cout << x << " ";
+}
+
 int main()
 {
 	starter();
@@ -75,7 +113,10 @@ int main()
 		cin >> arr[i];
 	}
 
-	//brute_force(arr, n);
+	brute_force(arr, n);
+	cout << endl;
 	optimised(arr, n);
+	cout << endl;
+	nge(arr, n);
 	return 0;
 }

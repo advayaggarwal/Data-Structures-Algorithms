@@ -49,7 +49,7 @@ public:
     }
 };
 
-
+//Using Max Heap
 //Time complexity - O(n + klogn)
 class Solution {
 public:
@@ -70,5 +70,28 @@ public:
         }
 
         return ans;
+    }
+};
+
+//Using Min Heap
+//Time complexity - O(k + nlogk)
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+
+        priority_queue<int, vector<int>, greater<int>>heap;
+
+        for (int i = 0; i < nums.size(); i++)
+        {
+            if (i < k)  heap.push(nums[i]);
+
+            else
+            {
+                heap.push(nums[i]);
+                heap.pop();
+            }
+        }
+
+        return heap.top();
     }
 };

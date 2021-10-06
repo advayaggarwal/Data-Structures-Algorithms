@@ -1,6 +1,6 @@
 //Recursive Backtracking
 //Time complexity - O(2^n)
-//Space complexity - O(n) if considering Recursion requires additional memory for the stack frames. else O(1)
+//Space complexity - O(n) as Recursion requires additional memory for the stack frames
 
 class Solution {
 public:
@@ -20,13 +20,12 @@ public:
 
         return false;
     }
-
 };
 
 
 //Top Down DP
 //Time complexity - O(n^2) -> TLE
-////Space complexity - O(2n) if considering Recursion requires additional memory for the stack frames. else O(n)
+//Space complexity - O(2n) as Recursion requires additional memory for the stack frames
 
 class Solution {
 
@@ -120,7 +119,7 @@ public:
     bool canJump(vector<int>& nums) {
         int n = nums.size();
         int lastGood = n - 1;
-        for (int i = n - 1; i >= 0; i--)
+        for (int i = n - 2; i >= 0; i--)
         {
             if (i + nums[i] >= lastGood) lastGood = i;
         }

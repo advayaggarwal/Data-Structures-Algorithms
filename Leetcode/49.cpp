@@ -53,6 +53,7 @@ public:
             string key;
             for (int j = 0; j < 26; j++) key += string(count[j], j + 'a');
             //string(count,char), basically it will sort the key, same as count sort
+            //eg string(3, 'b') = bbb
             //cout << key << endl;
             m[key].push_back(strs[i]);
         }

@@ -1,6 +1,5 @@
 /*
 	AUTHOR:			ADVAY AGGARWAL
-	INSTITUTION:	IIIT DHARWAD
 */
 #include<bits/stdc++.h>
 using namespace std;

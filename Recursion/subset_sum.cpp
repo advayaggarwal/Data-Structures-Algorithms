@@ -32,6 +32,8 @@ void starter()
 	cout.tie(0);
 }
 
+
+//Time complexity - O(N*2^N)
 void subsetSum(vi &arr, int index, int target, vector<int>&sol, vector<vi> &res)
 {
 	//Base Case
@@ -78,7 +80,7 @@ int main()
 	vector<vi> res;
 	vector<int>sol;
 	subsetSum(arr, 0, target, sol, res);
-	cout << countSubsets(arr, 0, n, target) << endl;
+	cout << "No. of subsets having sum " << target << " are " << countSubsets(arr, 0, n, target) << endl;
 	for (auto e : res)
 	{
 		for (int x : e)	cout << x << " ";

@@ -14,6 +14,7 @@ public:
             }
         }
         int smallest_so_far = i;
+
         if (i != 0) //O(N)
         {
             for (int j = i + 1; j < n; j++)

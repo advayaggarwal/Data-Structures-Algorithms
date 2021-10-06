@@ -12,6 +12,7 @@ using namespace std;
 #define vi vector<int>
 #define setbits(x)      __builtin_popcountll(x)
 #define endl "\n"
+#define pii pair<int,int>
 
 
 template <typename Type>

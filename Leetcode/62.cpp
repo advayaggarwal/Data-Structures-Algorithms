@@ -2,18 +2,10 @@
 class Solution {
 public:
     int uniquePaths(int m, int n) {
-        return helper(m, n);
-    }
 
-    int helper(int m, int n)
-    {
+        if (m == 1 or n == 1)   return 1;
 
-        if (m == 1 || n == 1)
-        {
-            return 1;
-        }
-
-        return helper(m, n - 1) + helper(m - 1, n);
+        return uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
     }
 };
 
@@ -41,6 +33,7 @@ public:
 
 
 //Recursion with memoization
+//Time complexity - O(m*n)
 class Solution {
 public:
     int uniquePaths(int m, int n) {
@@ -62,7 +55,9 @@ public:
 };
 
 
-// DP
+//DP
+//Time complexity - O(m*n)
+//Space complexity - O(m*n)
 class Solution {
 public:
     int uniquePaths(int m, int n) {
@@ -80,6 +75,8 @@ public:
 };
 
 //DP
+//Time complexity - O(m*n)
+//Space complexity - O(m*n)
 class Solution {
 public:
     int uniquePaths(int m, int n) {
@@ -94,5 +91,24 @@ public:
             }
         }
         return dp[0][0];
+    }
+};
+
+//Combinatorics
+//Time complexity - O(m) or O(n)
+//Space complexity - O(1)
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        int N = n + m - 2;
+        //ans = (N)C(n-1) or (N)C(m-1)
+
+        double ans = 1;
+        int r = m - 1;
+        for (int i = 1; i <= r; i++)
+        {
+            ans = ans * (N - r + i) / i;
+        }
+        return (int)ans;
     }
 };

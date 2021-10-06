@@ -28,7 +28,7 @@ vector<int> maxSlidingWindow(vector<int>& nums, int k) {
 
     while (j < n)
     {
-        while (!dq.empty() and dq.back() < nums[j])   dq.pop_back();
+        while (!dq.empty() and dq.back() < nums[j])   dq.pop_back(); //removing the useless elements
 
         dq.push_back(nums[j]);
 

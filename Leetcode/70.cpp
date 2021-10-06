@@ -1,0 +1,56 @@
+//Top Down Dp
+//Time complexity - O(n)
+//Space complexity - O(n)
+class Solution {
+public:
+    int climbStairs(int n) {
+        vector<int>dp(50, -1);
+
+        return helper(n, dp);
+    }
+
+    int helper(int n, vector<int>&dp)
+    {
+        if (n == 0 or n == 1)   return 1;
+
+        if (dp[n] != -1) return dp[n];
+
+        return dp[n] = helper(n - 1, dp) + helper(n - 2, dp);
+    }
+};
+
+//Bottom Up Dp
+//Time complexity - O(n)
+//Space complexity - O(n)
+class Solution {
+public:
+    int climbStairs(int n) {
+        vector<int>dp(n + 1, 0);
+        dp[0] = 1;
+        dp[1] = 1;
+        for (int i = 2; i <= n; i++)
+        {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
+    }
+};
+
+//Bottom Up Dp
+//Time complexity - O(n)
+//Space complexity - O(1)
+class Solution {
+public:
+    int climbStairs(int n) {
+
+        int a = 1, b = 1, c = 1;
+
+        for (int i = 2; i <= n; i++)
+        {
+            c = a + b;
+            a = b;
+            b = c;
+        }
+        return c;
+    }
+};

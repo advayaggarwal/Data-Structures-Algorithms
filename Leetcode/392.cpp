@@ -64,3 +64,8 @@ public:
 
 };
 
+//3rd approach
+//Time complexity - O(n^2), n = s.size()
+//Space complexity - O(n^2)
+//Find LCS of both the strings
+//return lcs == s.size()

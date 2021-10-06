@@ -21,7 +21,6 @@ public:
         sol.push_back(nums[index]);
         helper(index + 1, target - nums[index], k, nums, sol, res);
         sol.pop_back(); //backtracking
-
     }
 
     vector<vector<int>> combinationSum3(int k, int n) {
@@ -35,7 +34,6 @@ public:
         helper(0, n, k, nums, sol, res);
 
         return res;
-
     }
 };
 
@@ -63,7 +61,6 @@ public:
         sol.push_back(num);
         helper(num + 1, target - num, k - 1, sol, res);
         sol.pop_back();
-
     }
 
     vector<vector<int>> combinationSum3(int k, int n) {
@@ -76,6 +73,5 @@ public:
         helper(1, n, k, sol, res);
 
         return res;
-
     }
 };

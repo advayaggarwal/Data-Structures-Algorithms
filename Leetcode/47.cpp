@@ -92,7 +92,7 @@ public:
         for (int j = index; j < nums.size(); j++)
         {
             if (s.find(nums[j]) != s.end())    continue; //i.e we've already used nums[j] at position index, if we again use-
-            //-it will give duplicate permutations
+            //it will give duplicate permutations
             s.insert(nums[j]);
             swap(nums[index], nums[j]);
             helper(nums, index + 1, ans);
