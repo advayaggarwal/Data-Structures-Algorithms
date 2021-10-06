@@ -1,2 +1,5 @@
 input.txt
 output.txt
+*
+!*.c
+!Makefile
