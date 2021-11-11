@@ -1,3 +1,5 @@
+//Time complexity - O(n)
+//Space complexity - O(n)
 class Solution {
 public:
     unordered_map<int, int>index;

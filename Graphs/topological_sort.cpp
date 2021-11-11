@@ -36,7 +36,6 @@ void starter()
 vi indegree_cal(int n, vi adj[])
 {
 	//Iterate over all the edges to find the indegree
-
 	vector<int>indegree(n, 0);
 	for (int i = 0; i < n; i++)
 	{

@@ -8,6 +8,7 @@ using namespace std;
 #define ll 	long long int
 #define test_cases(x)	int x; cin>>x; while(x--)
 #define vi vector<int>
+#define vvi vector<vector<int>>
 #define setbits(x)      __builtin_popcountll(x)
 #define endl "\n"
 #define pii pair<int,int>
@@ -42,11 +43,7 @@ in increasing order.
 //Time complexity - O(2^n)
 int lis(vi &v, int index, int n, int prev) //Longest Increasing Subsequence
 {
-	if (index == n - 1)
-	{
-		if (v[index] > prev)	return 1;
-		return 0;
-	}
+	if (index >= n)		return 0;
 
 	int inc = 0;
 
@@ -60,32 +57,32 @@ int lis(vi &v, int index, int n, int prev) //Longest Increasing Subsequence
 	return max(inc, exc);
 }
 
-/*
-int lisTD(vi &v, int index, int n, int prev, vi &dp) //Longest Increasing Subsequence
+//Top Down DP
+//Time complexity - O(n^2)
+//Space complexity - O(n^2)
+int lisTD(vi &v, int index, int n, int prev, vvi &dp)
 {
-	if (index == n - 1)
-	{
-		if (v[index] > v[prev])	return 1;
-		return 0;
-	}
+	if (index >= n)	return 0;
 
-	if (dp[index] != -1)	return dp[index];
+	if (prev != -1 && dp[index][prev] != -1)	return dp[index][prev];
 
 	int inc = 0;
 
-	if (v[index] > v[prev])
+	if (prev == -1 or v[index] > v[prev]) //prev -1 means no elements have been included yet
 	{
 		inc = 1 + lisTD(v, index + 1, n, index, dp);
 	}
 
 	int exc = lisTD(v, index + 1, n, prev, dp);
 
-	return dp[index] = max(inc, exc);
+	if (prev != -1)	dp[index][prev] = max(inc, exc);
+
+	return max(inc, exc);
 }
-*/
 
 //Bottom Up DP
 //Time complexity - O(n^2)
+//Space complexity - O(n)
 int lisBU(vi &v, int n)
 {
 	vi dp(n, 1); //dp[i] denotes the length of LIS ending at index i
@@ -102,6 +99,7 @@ int lisBU(vi &v, int n)
 }
 
 //Time complexity - O(n*logn)
+//Space complexity - O(n)
 int lengthOfLIS(vector<int>& nums) {
 
 	vector<int>sub;
@@ -123,6 +121,51 @@ int lengthOfLIS(vector<int>& nums) {
 	return sub.size();
 }
 
+int getBestCandidate(map<int, int>&candidates, int num)
+{
+	auto it = candidates.lower_bound(num);
+	if (it == candidates.begin())	return 0;
+
+	it--;
+
+	return it->second;
+}
+
+void insert(map<int, int>&candidates, int num, int advantage)
+{
+	if (candidates[num] >= advantage)	return;
+
+	candidates[num] = advantage;
+
+	auto it = candidates.find(num);
+	it++;
+
+	while (it != candidates.end() && it->second <= advantage)
+	{
+		auto temp = it;
+		it++;
+
+		candidates.erase(temp);
+	}
+}
+
+int legnthLIS(vector<int>&v, int n)
+{
+	int dp[n];
+	dp[0] = 1; //dp[i] denotes the length of LIS ending at index i
+
+	map<int, int>candidates; //{num, length of lis ending at num}
+	candidates[v[0]] = 1;
+
+	for (int i = 1; i < n; i++)
+	{
+		dp[i] = 1 + getBestCandidate(candidates, v[i]); //maximum number smaller than nums[i] with best advantage
+		insert(candidates, v[i], dp[i]);
+	}
+
+	return *max_element(dp, dp + n);
+}
+
 
 int main()
 {
@@ -134,9 +177,9 @@ int main()
 	vi v(n);
 	cin >> v;
 
-	vi dp(n, -1);
+	vvi dp(n, vi(n, -1));
 
-	cout << lis(v, 0, n, INT_MIN) << " " << lisBU(v, n) << " " << lengthOfLIS(v);
+	cout << lis(v, 0, n, INT_MIN) << " " << lisTD(v, 0, n, -1, dp) << " " << lisBU(v, n) << " " << lengthOfLIS(v) << " " << legnthLIS(v, n);
 
 	return 0;
 }

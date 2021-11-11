@@ -55,6 +55,46 @@ bool dfs(int source, vi adj[], vector<bool> &visited, vector<bool> &dfs_visited)
 	return false;
 }
 
+//Using BFS, Kahn's Algorithm
+
+bool bfs(int n, vi adj[])
+{
+	vi indegree(n + 1, 0);
+
+	//calculating indegrees
+	for (int i = 0; i < n; i++)
+	{
+		for (int nbr : adj[i])
+		{
+			indegree[nbr]++;
+		}
+	}
+
+	queue<int>q;
+	for (int i = 0; i < n; i++)
+	{
+		if (indegree[i] == 0)	q.push(i);
+	}
+
+	int node_count = 0;
+
+	while (!q.empty())
+	{
+		int node = q.front();
+		q.pop();
+
+		for (int nbr : adj[node])
+		{
+			indegree[nbr]--;
+			if (indegree[nbr] == 0)	q.push(nbr);
+		}
+
+		node_count++;
+	}
+
+	return node_count == n ? true : false;
+}
+
 int main()
 {
 	starter();

@@ -21,7 +21,7 @@ class Solution {
 public:
     int firstUniqChar(string s) {
 
-        vector<pair<int, int>>occurrence(26); //{freq,index}
+        vector<pair<int, int>>occurrence(26); //{freq, latest_index}
         int n = s.size();
 
         for (int i = 0; i < n; i++)

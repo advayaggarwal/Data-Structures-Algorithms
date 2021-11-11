@@ -33,6 +33,8 @@ void starter()
 	cout.tie(0);
 }
 
+//Time complexity - exponential
+//Space complexity - O(target)
 int combinationSum(vi &coins, int target, int i)
 {
 	if (target == 0)	return 1;
@@ -42,6 +44,8 @@ int combinationSum(vi &coins, int target, int i)
 	return combinationSum(coins, target, i + 1) + combinationSum(coins, target - coins[i], i);
 }
 
+//Time complexity - O(n*target)
+//Space complexity - O(n*target)
 ll combinationSumTD(vi &coins, int target, int i, vvi &dp)
 {
 	if (target == 0)	return 1;
@@ -53,6 +57,8 @@ ll combinationSumTD(vi &coins, int target, int i, vvi &dp)
 	return dp[i][target] = combinationSumTD(coins, target, i + 1, dp) + combinationSumTD(coins, target - coins[i], i, dp);
 }
 
+//Time complexity - O(n*target)
+//Space complexity - O(n*target)
 int combinationSumBU(vi &coins, int target)
 {
 	int n = coins.size();

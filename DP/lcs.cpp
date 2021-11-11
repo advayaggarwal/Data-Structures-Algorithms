@@ -65,7 +65,6 @@ int lcsTD(string &s1, string &s2, int i, int j, vvi &dp)
 	return dp[i][j] = max(op1, op2);
 }
 
-
 string LCS(string &s1, string &s2, int n1, int n2, vvi &dp)
 {
 	string s; //to store the lcs

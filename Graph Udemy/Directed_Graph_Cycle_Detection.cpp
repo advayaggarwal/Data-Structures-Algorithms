@@ -1,3 +1,4 @@
+//Using DFS
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -43,5 +44,57 @@ bool solve(int n, vector<vector<int>>edges)
 		}
 	}
 
+	return false;
+}
+
+//Using BFS, Kahn's Algo
+#include<bits/stdc++.h>
+using namespace std;
+
+bool bfs(int n, vector<int>&indegree, vector<int> adj[])
+{
+	queue<int>q;
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (indegree[i] == 0)	q.push(i);
+	}
+
+	int node_count = 0;
+
+	while (!q.empty())
+	{
+		int node = q.front();
+		q.pop();
+
+		for (int nbr : adj[node])
+		{
+			indegree[nbr]--;
+			if (indegree[nbr] == 0)	q.push(nbr);
+		}
+
+		node_count++;
+	}
+
+	return node_count == n ? false : true;
+}
+
+bool solve(int n, vector<vector<int>>edges) {
+
+	vector<int>adj[n + 1];
+	vector<int> indegree(n + 1, 0);
+
+	vector<bool>visited(n + 1, false);
+
+	for (int i = 0; i < edges.size(); i++)
+	{
+		int u = edges[i][0];
+		int v = edges[i][1];
+
+		adj[u].push_back(v);
+		indegree[v]++;
+	}
+
+	if (bfs(n, indegree, adj))   return true;
 	return false;
 }

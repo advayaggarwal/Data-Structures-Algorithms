@@ -161,6 +161,7 @@ int main()
 
 	int ans = -1; //-1 if no ans exists
 
+	//OR simply store the inorder traversal in one vector and return v[k-1], as we know the inorder traversal is sorted
 	inorder(root, ans, k);
 	cout << ans;
 

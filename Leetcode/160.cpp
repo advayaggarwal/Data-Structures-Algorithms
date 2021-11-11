@@ -1,12 +1,3 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
-
 // 4 pass solution
 //Time complexity - O(n+m)
 //Space complexity - O(1)
@@ -14,7 +5,7 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        int m = 0, n = 0;
+        int m = 0, n = 0; //lengths of lists A and B respectively
         ListNode *temp = headA;
         while (temp)
         {

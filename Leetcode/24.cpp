@@ -1,34 +1,45 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
+//Iterative
+//Time complexity - O(n)
+//Space complexity - O(1)
 class Solution {
 public:
-    ListNode* swapPairs(ListNode* head) {
-        if (!head || !head->next)    return head;
-        ListNode *temp;
-        ListNode *p = head;
-        head = head->next;
-        ListNode *q;
-        while (1)
+    ListNode* swapPairs(ListNode* head)
+    {
+        if (!head or !head->next)    return head;
+
+        ListNode *dummy = new ListNode(-1);
+        dummy->next = head;
+
+        ListNode *prev = dummy, *current = head;
+
+        while (current && current->next)
         {
-            if (p)    q = p->next;
-            if (q)    temp = q->next;
-            if (q)    q->next = p;
-            if (!temp || !temp->next)
-            {
-                if (p)   p->next = temp;
-                break;
-            }
-            if (p)    p->next = temp->next;
-            p = temp;
+            prev->next = current->next;
+            current->next = current->next->next;
+            prev->next->next = current;
+
+            current = current->next;
+            prev = prev->next->next;
         }
-        return head;
+
+        return dummy->next;
+    }
+};
+
+//Recursive
+//Time complexity - O(n)
+//Space complexity - O(n), recursive stack space
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head)
+    {
+        if (!head or !head->next)    return head;
+
+        ListNode *nHead = head->next;
+        head->next = swapPairs(head->next->next);
+
+        nHead->next = head;
+
+        return nHead;
     }
 };

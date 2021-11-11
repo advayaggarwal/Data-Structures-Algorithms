@@ -6,12 +6,12 @@ public:
 
         if (root->val == key)
         {
-            if (!root->left and !root->right)
+            if (!root->left and !root->right) //No child
             {
                 return NULL;
             }
 
-            else if (root->left and root->right)
+            else if (root->left and root->right) //Both children
             {
                 TreeNode *temp = maxElement(root->left);
 
@@ -22,7 +22,7 @@ public:
                 return root;
             }
 
-            else
+            else //1 child
             {
                 if (root->left)  return root->left;
                 else   return root->right;

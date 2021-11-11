@@ -49,7 +49,7 @@ public:
         sort(nums.begin(), nums.end());
         vector<vector<int>>res;
 
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n - 2; i++)
         {
             if (nums[i] > 0)   break; //As if nums[i] is greater than 0 then all elements right to i will also be greater than 0 so their's sum can't be 0
 

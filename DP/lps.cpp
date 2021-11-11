@@ -83,8 +83,8 @@ int lcsBU(string &s1, string &s2)
 	return dp[n1][n2];
 }
 
-//Longest Palindromic Subsequence LPA
-// LPA(a) = LCS(a, reverse(a))
+//Longest Palindromic Subsequence LPS
+// LPS(a) = LCS(a, reverse(a))
 int main()
 {
 	starter();

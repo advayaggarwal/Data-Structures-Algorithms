@@ -1,4 +1,5 @@
 //Recursion Bottom Up
+//Time complexity - O(2^(m*n))
 class Solution {
 public:
     int uniquePaths(int m, int n) {
@@ -21,19 +22,16 @@ public:
     {
         if (i >= m)    return 0;
         if (j >= n)    return 0;
-        if (i == m - 1 && j == n - 1)
-        {
-            return 1;
-        }
+        if (i == m - 1 && j == n - 1)   return 1;
 
         return helper(i + 1, j, m, n) + helper(i, j + 1, m, n);
     }
-
 };
 
 
-//Recursion with memoization
+//Recursion with memoization(Top Down DP)
 //Time complexity - O(m*n)
+//Space complexity - O(m*n)
 class Solution {
 public:
     int uniquePaths(int m, int n) {
@@ -51,11 +49,10 @@ public:
 
         return dp[i][j] = helper(i + 1, j, m, n, dp) + helper(i, j + 1, m, n, dp);
     }
-
 };
 
 
-//DP
+//Bottom Up DP
 //Time complexity - O(m*n)
 //Space complexity - O(m*n)
 class Solution {
@@ -74,7 +71,7 @@ public:
     }
 };
 
-//DP
+//Bottom Up DP
 //Time complexity - O(m*n)
 //Space complexity - O(m*n)
 class Solution {
@@ -100,15 +97,16 @@ public:
 class Solution {
 public:
     int uniquePaths(int m, int n) {
-        int N = n + m - 2;
+        int N = n + m - 2; //(n-1) + (m-1) i.e. we have to take m-1 steps downwards and n-1 steps rightwards
         //ans = (N)C(n-1) or (N)C(m-1)
 
         double ans = 1;
         int r = m - 1;
         for (int i = 1; i <= r; i++)
         {
-            ans = ans * (N - r + i) / i;
+            ans = ans * (N - r + i) / i; //eg- 10C3 = (8*9*10)/1*2*3
         }
+
         return (int)ans;
     }
 };

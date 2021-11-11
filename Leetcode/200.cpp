@@ -1,22 +1,23 @@
 class Solution {
 public:
+    int dx[4] = { -1, 1, 0, 0};
+    int dy[4] = {0, 0, 1, -1};
 
-    int row;
-    int col;
+    int numIslands(vector<vector<char>>& grid)
+    {
+        int m = grid.size(), n = grid[0].size();
+        vector<vector<bool>>visited(m, vector<bool>(n, false));
 
-    int numIslands(vector<vector<char>>& grid) {
-        row = grid.size();
-        col = grid[0].size();
-        vector<vector<bool>>visited(row, vector<bool>(col, false));
-        int count  = 0;
-        for (int i = 0; i < row; i++)
+        int count = 0;
+
+        for (int i = 0; i < m; i++)
         {
-            for (int j = 0; j < col; j++)
+            for (int j = 0; j < n; j++)
             {
                 if (grid[i][j] == '1' && !visited[i][j])
                 {
-                    DFS(grid, i , j, visited);
                     count++;
+                    dfs(i, j, m, n, visited, grid);
                 }
             }
         }
@@ -24,72 +25,16 @@ public:
         return count;
     }
 
-
-    void DFS(vector<vector<char>>& grid, int i, int j, vector<vector<bool>>& visited)
+    void dfs(int i, int j, int m, int n, vector<vector<bool>>&visited, vector<vector<char>>& grid)
     {
-        int rd[4] = { -1, 0, 0, 1}; //{Up, left, right, down}
-        int cd[4] = {0, -1, 1, 0};
         visited[i][j] = true;
+
         for (int k = 0; k < 4; k++)
         {
-            if (isSafe(grid, i + rd[k], j + cd[k], visited))
-            {
-                DFS(grid, i + rd[k], j + cd[k], visited);
-            }
+            int x = i + dx[k];
+            int y = j + dy[k];
+
+            if (x >= 0 && x < m && y >= 0 && y < n && !visited[x][y] && grid[x][y] == '1') dfs(x, y, m, n, visited, grid);
         }
     }
-
-    bool isSafe(vector<vector<char>>& grid, int i, int j, vector<vector<bool>>& visited)
-    {
-        return (i >= 0) && (i < row) && (j >= 0) && (j < col) && grid[i][j] == '1' && !visited[i][j] ;
-    }
-
-};
-
-
-
-
-class Solution {
-public:
-
-    int row;
-    int col;
-
-    int numIslands(vector<vector<char>>& grid) {
-        row = grid.size();
-        col = grid[0].size();
-        vector<vector<bool>>visited(row, vector<bool>(col, false));
-        int count  = 0;
-        for (int i = 0; i < row; i++)
-        {
-            for (int j = 0; j < col; j++)
-            {
-                if (grid[i][j] == '1' && !visited[i][j])
-                {
-                    DFS(grid, i , j, visited);
-                    count++;
-                }
-            }
-        }
-
-        return count;
-    }
-
-
-    void DFS(vector<vector<char>>& grid, int i, int j, vector<vector<bool>>& visited)
-    {
-        visited[i][j] = true;
-
-        if (isSafe(grid, i - 1, j, visited))    DFS(grid, i - 1, j, visited);
-        if (isSafe(grid, i, j - 1, visited))    DFS(grid, i, j - 1, visited);
-        if (isSafe(grid, i + 1, j, visited))    DFS(grid, i + 1, j, visited);
-        if (isSafe(grid, i, j + 1, visited))    DFS(grid, i, j + 1, visited);
-
-    }
-
-    bool isSafe(vector<vector<char>>& grid, int i, int j, vector<vector<bool>>& visited)
-    {
-        return (i >= 0) && (i < row) && (j >= 0) && (j < col) && grid[i][j] == '1' && !visited[i][j] ;
-    }
-
 };

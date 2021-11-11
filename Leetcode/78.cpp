@@ -1,4 +1,4 @@
-
+//Time complexity - O(n*2^n)
 //Bit masking
 class Solution {
 public:
@@ -21,7 +21,7 @@ public:
 
 
 //Recursion and Backtracking
-
+//Time complexity - O(n*2^n)
 class Solution {
 public:
     vector<vector<int>>ans;
@@ -29,7 +29,7 @@ public:
     {
         if (i == nums.size())
         {
-            ans.push_back(output);
+            ans.push_back(output); //O(n)
             return;
         }
 

@@ -34,7 +34,7 @@ void starter()
 }
 
 //Recursion
-//Time complexity - O(n^s), n is number of denominations and s is the target amount.
+//Time complexity - O(s^n), n is number of denominations and s is the target amount.
 int coinChange(vi &denominations, int target)
 {
 	if (target < 0 )	return -1;
@@ -51,6 +51,8 @@ int coinChange(vi &denominations, int target)
 	return  ans < 0 ? -1 : 1 + ans;
 }
 
+//Time complexity - O(n*target)
+//Space complexity - O(target)
 int coinChangeTD(vi &denominations, int target, vi &dp)
 {
 	if (target < 0 )	return -1;
@@ -70,10 +72,11 @@ int coinChangeTD(vi &denominations, int target, vi &dp)
 }
 
 //Bottom Up DP
-//Time complexity - O(n*s), n is number of denominations and s is the target amount.
+//Time complexity - O(n*target)
+//Space complexity - O(target)
 int coinChangeBU(vi &denominations, int target)
 {
-	vi dp(target + 1, target + 1);
+	vi dp(target + 1, INT_MAX - 1);
 
 	dp[0] = 0;
 	for (int amount = 1; amount <= target; amount++)

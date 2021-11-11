@@ -1,5 +1,3 @@
-//DAG - no need to take bool visited vector
-//Time complexity - O(2^n), exponential
 class Solution {
 public:
     vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
@@ -19,16 +17,13 @@ public:
         if (node == n - 1)
         {
             ans.push_back(path);
+            return ;
         }
 
-        else
+        for (int nbr : graph[node])
         {
-            for (int nbr : graph[node])
-            {
-                dfs(n, nbr, graph, ans, path);
-            }
+            dfs(n, nbr, graph, ans, path);
+            path.pop_back();
         }
-
-        path.pop_back();
     }
 };

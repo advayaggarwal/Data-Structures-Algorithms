@@ -1,12 +1,3 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
-
 //Time complexity - O(n)
 //Space complexity - O(1)
 class Solution {

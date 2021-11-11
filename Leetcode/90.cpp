@@ -31,8 +31,5 @@ public:
         temp.push_back(nums[i]);
         helper(i + 1, nums, temp , ans, true);
         temp.pop_back();
-
-
-
     }
 };

@@ -1,4 +1,5 @@
-
+//Time complexity - O(n*n)
+//Space complexity - O(1)
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {

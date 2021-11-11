@@ -1,3 +1,4 @@
+//2 Pointer Approach
 //Time complexity - O(n)
 //Space complexity - O(n)
 class Solution {
@@ -39,6 +40,7 @@ public:
     }
 };
 
+//Iterative Inorder
 //Time complexity - O(n)
 //Space complexity - O(h)
 class Solution {
@@ -75,6 +77,7 @@ public:
 
         return false;
     }
+
     void pushElements(TreeNode *root, stack<TreeNode*>&s, bool l_direction)
     {
         if (l_direction)

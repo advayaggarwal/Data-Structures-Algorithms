@@ -1,11 +1,12 @@
 //Top Down DP
-
+//Time complexity - O(m*n)
+//Space complexity - O(m*n)
 #define vvi vector<vector<int>>
 class Solution {
 public:
     int longestCommonSubsequence(string text1, string text2) {
-        int n1 = text1.size(), n2 = text2.size();
-        vvi dp(n1, vector<int>(n2, -1));
+        int m = text1.size(), n = text2.size();
+        vvi dp(m, vector<int>(n, -1));
 
         return lcs(text1, text2, 0, 0, dp);
     }
@@ -25,8 +26,10 @@ public:
     }
 };
 
-//Bottom Up DP
 
+//Bottom Up DP
+//Time complexity - O(m*n)
+//Space complexity - O(m*n)
 #define vvi vector<vector<int>>
 #define vi vector<int>
 class Solution {
@@ -37,13 +40,13 @@ public:
 
     int lcsBU(string &s1, string &s2)
     {
-        int n1 = s1.size(), n2 = s2.size();
+        int m = s1.size(), n = s2.size();
 
-        vvi dp(n1 + 1, vi(n2 + 1, 0));
+        vvi dp(m + 1, vi(n + 1, 0));
 
-        for (int i = 1; i <= n1; i++)
+        for (int i = 1; i <= m; i++)
         {
-            for (int j = 1; j <= n2; j++)
+            for (int j = 1; j <= n; j++)
             {
                 if (s1[i - 1] == s2[j - 1]) dp[i][j] = 1 + dp[i - 1][j - 1];
 
@@ -51,7 +54,7 @@ public:
             }
         }
 
-        return dp[n1][n2];
+        return dp[m][n];
     }
 
 };

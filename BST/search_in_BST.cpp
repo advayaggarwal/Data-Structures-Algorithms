@@ -136,7 +136,6 @@ bool search(Node *root, int target)
 
 bool search_iterative(Node *root, int target)
 {
-
 	while (root and root->val != target)
 	{
 		if (root->val < target)	root = root->right;

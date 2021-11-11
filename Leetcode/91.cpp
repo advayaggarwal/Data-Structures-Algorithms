@@ -23,7 +23,7 @@ public:
 
         if (index < s.size() - 1)
         {
-            int no = stoi(string(1, s[index]) + string(1, s[index + 1]));
+            int no = (s[index] - '0') * 10 + (s[index + 1] - '0');
 
             if (no > 0 and no <= 26)
             {
@@ -49,20 +49,16 @@ public:
 
         for (int i = n - 1; i >= 0; i--)
         {
-            int op1 = 0, op2 = 0;
-
             if (s[i] == '0') dp[i] = 0;
             else
             {
-                op1 = dp[i + 1];
+                dp[i] = dp[i + 1];
 
                 if (i < n - 1)
                 {
-                    int no = stoi(string(1, s[i]) + string(1, s[i + 1]));
-                    if (no > 0 and no <= 26)  op2 = dp[i + 2];
+                    int no = (s[i] - '0') * 10 + (s[i + 1] - '0');
+                    if (no > 0 and no <= 26)  dp[i] += dp[i + 2];
                 }
-
-                dp[i] = op1 + op2;
             }
         }
 

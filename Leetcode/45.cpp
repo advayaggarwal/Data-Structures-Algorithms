@@ -1,4 +1,6 @@
 //Top Down DP
+//Time complexity - O(n^2)
+//Space complexity - O(n)
 class Solution {
 public:
     int jump(vector<int>& nums) {
@@ -21,10 +23,11 @@ public:
         }
         return dp[index] = ans;
     }
-
 };
 
 //Bottom Up DP
+//Time complexity - O(n^2)
+//Space complexity - O(n)
 class Solution {
 public:
     int jump(vector<int>& nums) {
@@ -47,40 +50,28 @@ public:
     }
 };
 
+//Greedy
+//Time complexity - O(n)
+//Space complexity - O(1)
 class Solution {
 public:
-    int jump(vector<int>& nums) {
+    int jump(vector<int>& nums)
+    {
+        int currentReach = 0, maxReach = 0;
         int n = nums.size();
-        vector<int>dp(n, -1);
-        dp[n - 1] = 0;
+        int jumps = 0;
 
-        for (int i = n - 2; i >= 0; i--)
+        for (int i = 0; i < n - 1; i++)
         {
-            if (i + nums[i] >= n - 1)   dp[i] = 1;
+            maxReach = max(maxReach, i + nums[i]);
 
-            else
+            if (i == currentReach)
             {
-                int minj = INT_MAX;
-                bool flag = false;
-                for (int j = i + 1; j <= (i + nums[i]); j++)
-                {
-                    flag = true;
-                    if (dp[j] == 1)
-                    {
-                        dp[i] = 2;
-                        break;
-                    }
-                    minj = min(minj, dp[j]);
-                }
-
-                if (dp[i] == -1)
-                {
-                    if (!flag || minj == INT_MAX ) dp[i] = INT_MAX;
-                    else dp[i] =  1 + minj;
-                }
+                jumps++;
+                currentReach = maxReach;
             }
         }
 
-        return dp[0];
+        return jumps;
     }
 };
