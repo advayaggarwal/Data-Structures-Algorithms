@@ -4,22 +4,24 @@
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        vector<int>dp(nums.size() + 1, -1);
-        return helper(nums, 0, dp);
+        int n = nums.size();
+        vector<int>dp(n + 1, -1);
+        return helper(nums, 0, n, dp);
     }
 
-    int helper(vector<int>&nums, int index, vector<int>&dp)
+    int helper(vector<int>&nums, int index, int n, vector<int>&dp)
     {
-        if (index == nums.size() - 1)    return 0;
-        if (index >= nums.size())    return INT_MAX;
+        if (index >= n - 1)    return 0;
+
         if (dp[index] != -1)   return dp[index];
+
         int ans = INT_MAX;
 
         for (int jump = 1; jump <= nums[index]; jump++)
         {
-            int subprob = helper(nums, index + jump, dp);
+            int subprob = helper(nums, index + jump, n, dp);
 
-            if (subprob != INT_MAX) ans = min(ans, 1 + helper(nums, index + jump, dp));
+            if (subprob != INT_MAX) ans = min(ans, 1 + subprob);
         }
         return dp[index] = ans;
     }
@@ -30,22 +32,24 @@ public:
 //Space complexity - O(n)
 class Solution {
 public:
-    int jump(vector<int>& nums) {
-
+    int jump(vector<int>& nums)
+    {
         int n = nums.size();
-        vector<int>dp(n, 0);
+        vector<int>dp(n, INT_MAX);
+        dp[n - 1] = 0;
 
         for (int i = n - 2; i >= 0; i--)
         {
             int ans = INT_MAX;
-
-            for (int jumps = 1; jumps <= nums[i] && i + jumps < n; jumps++)
+            int farthest = min(n - 1, i + nums[i]);
+            for (int j = i + 1; j <= farthest; j++)
             {
-                if (dp[i + jumps] != INT_MAX)    ans = min(ans, 1 + dp[i + jumps]);
+                if (dp[j] != INT_MAX)    ans = min(ans, 1 + dp[j]);
             }
 
             dp[i] = ans;
         }
+
         return dp[0];
     }
 };

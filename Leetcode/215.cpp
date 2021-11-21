@@ -1,4 +1,5 @@
 //Time complexity - O(nlogn)
+//Space complexity - O(1)
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
@@ -9,6 +10,7 @@ public:
 
 
 //Time complexity - O(n), Worst case - O(n^2)
+//Space complexity - O(n)
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) { //average O(n)
@@ -51,6 +53,7 @@ public:
 
 //Using Max Heap
 //Time complexity - O(n + klogn)
+//Space complexity - O(n)
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
@@ -75,6 +78,7 @@ public:
 
 //Using Min Heap
 //Time complexity - O(k + nlogk)
+//Space complexity - O(k)
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {

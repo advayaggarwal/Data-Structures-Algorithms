@@ -17,7 +17,8 @@ public:
     for (int i = 0; i < n; i++)  m[nums[i]]++;
     vector<int>res;
 
-    priority_queue<pair<int, int>, vector<pair<int, int>>, my_comp> heap;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, my_comp> heap; //sorting is based on first element
+    //so we can push {ele.second, ele.first} -> then no need of custom comparator
 
     for (auto ele : m)
     {
@@ -32,40 +33,11 @@ public:
     }
     return res;
   }
-
-
 };
 
 
 //Using Min Heap
 //Time complexity - O(N*logK)
-class Solution {
-public:
-  vector<int> topKFrequent(vector<int>& nums, int k) {
-    unordered_map<int, int>m;
-    int n = nums.size();
-    for (int i = 0; i < n; i++)  m[nums[i]]++;
-    vector<int>res;
-
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> heap;
-
-    for (auto ele : m) //O(N*logK)
-    {
-      heap.push({ele.second, ele.first});
-      if (heap.size() > k)   heap.pop();
-    }
-
-    while (heap.size() != 0) //O(K*logK)
-    {
-      int ans = heap.top().second;
-      heap.pop();
-      res.push_back(ans);
-    }
-    return res;
-  }
-};
-
-
 #define pii pair<int,int>
 class Solution {
 public:
@@ -103,6 +75,7 @@ public:
 
 //Bucket Sort
 //Time complexity - O(N)
+//Space complexity - O(N)
 class Solution {
 public:
   vector<int> topKFrequent(vector<int>& nums, int k) {
@@ -111,7 +84,8 @@ public:
     for (int i = 0; i < n; i++)  m[nums[i]]++;
     vector<int>res;
 
-    vector<vector<int>>bucket(n + 1);
+    //bucket[i] denotes numbers having frequency i
+    vector<vector<int>>bucket(n + 1); //freq of a num in nums ranges from 1 to n
 
     for (auto e : m)
     {

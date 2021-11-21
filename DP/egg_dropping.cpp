@@ -72,7 +72,7 @@ int eggDropTD(int eggs, int floors, vvi &dp)
 		ans = min(ans, temp);
 	}
 
-	return ans;
+	return dp[eggs][floors] = ans;
 }
 
 int eggDropBU(int eggs, int floors)

@@ -1,3 +1,5 @@
+//Time complexity - O(n)
+//Space complexity - O(1)
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
@@ -12,6 +14,5 @@ public:
         }
 
         return maxprofit;
-
     }
 };

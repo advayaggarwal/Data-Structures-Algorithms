@@ -13,7 +13,6 @@ public:
 
     int maxNonAdjacentSumTD(vi &v, int index, int n, vi &dp)
     {
-        if (index == n - 1) return v[index];
         if (index >= n) return 0;
 
         if (dp[index] != -1)    return dp[index];

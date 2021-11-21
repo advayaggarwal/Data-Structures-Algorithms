@@ -16,33 +16,59 @@ public:
     }
 };
 
+//Using Max Heap
+//Time complexity - O(n + klogk), where k is #unique characters, n is the size of string s
+class Solution {
+public:
+    string frequencySort(string s)
+    {
+        string res;
+
+        vector<int>freq(256);
+
+        for (char ch : s)    freq[ch]++; //O(n)
+
+        priority_queue<pair<int, char>, vector<pair<int, char>>>maxHeap;
+
+        for (int i = 0; i < 256; i++)
+        {
+            if (freq[i] > 0) maxHeap.push({freq[i], char(i)});
+        }
+
+        while (!maxHeap.empty())
+        {
+            res += string(maxHeap.top().first, maxHeap.top().second);
+            maxHeap.pop();
+        }
+
+        return res;
+    }
+};
 
 //Bucket sort technique
 //Time complexity - O(n), where n is size of string s
 //Space complexity - O(n)
 class Solution {
 public:
-    string frequencySort(string s) {
-
-        unordered_map<char, int>freq;
-
-        for (char ch : s)  freq[ch]++;
-
-        vector<string> bucket(s.size() + 1, ""); //max chars will be s.size() if all are different
+    string frequencySort(string s)
+    {
         string res;
 
-        for (auto e : freq)
-        {
-            int n = e.second;
-            char c = e.first;
+        vector<int>freq(256);
 
-            bucket[n] += string(n, c); //char c occurs n times
-            //string(n,c) appends char c, n times
+        for (char ch : s)    freq[ch]++;
+
+        vector<string>bucket(s.size() + 1);
+
+        for (int i = 0; i < 256; i++)
+        {
+            char c = i;
+            bucket[freq[i]] += string(freq[i], c);
         }
 
         for (int i = s.size(); i >= 0; i--)
         {
-            res +=  bucket[i];
+            res += bucket[i];
         }
 
         return res;
