@@ -1,7 +1,6 @@
 //Recursion with Memoization
 //Time complexity - O(n^2)
 //Space complexity - O(n)
-
 class Solution {
 public:
     int numTrees(int n) {
@@ -17,7 +16,7 @@ public:
         if (dp[n] != -1)   return dp[n];
 
         int count = 0;
-        for (int i = 1; i <= n; i++)
+        for (int i = 1; i <= n; i++) //take i as the root node
         {
             count += uniqueBST(i - 1, dp) * uniqueBST(n - i, dp);
         }
@@ -30,7 +29,6 @@ public:
 //Tabulation
 //Time complexity - O(n^2)
 //Space complexity - O(n)
-
 class Solution {
 public:
     int numTrees(int n) {

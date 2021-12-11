@@ -100,13 +100,13 @@ public:
         int N = n + m - 2; //(n-1) + (m-1) i.e. we have to take m-1 steps downwards and n-1 steps rightwards
         //ans = (N)C(n-1) or (N)C(m-1)
 
-        double ans = 1;
+        int ans = 1;
         int r = m - 1;
         for (int i = 1; i <= r; i++)
         {
-            ans = ans * (N - r + i) / i; //eg- 10C3 = (8*9*10)/1*2*3
+            ans = ans * 1LL * (N - r + i) / i; //eg- 10C3 = (8*9*10)/1*2*3
         }
 
-        return (int)ans;
+        return ans;
     }
 };

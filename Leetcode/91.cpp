@@ -12,20 +12,18 @@ public:
     int helper(string &s, int index, vector<int>&dp)
     {
         if (index >= s.size())   return 1;
-
         if (dp[index] != -1)   return dp[index];
-
-        int ans1 = 0, ans2 = 0;
 
         if (s[index] == '0') return 0;
 
-        ans1 = helper(s, index + 1, dp);
+        int ans1 = helper(s, index + 1, dp);
+        int ans2 = 0;
 
         if (index < s.size() - 1)
         {
             int no = (s[index] - '0') * 10 + (s[index + 1] - '0');
 
-            if (no > 0 and no <= 26)
+            if (no >= 10 and no <= 26)
             {
                 ans2 = helper(s, index + 2, dp);
             }
@@ -57,12 +55,11 @@ public:
                 if (i < n - 1)
                 {
                     int no = (s[i] - '0') * 10 + (s[i + 1] - '0');
-                    if (no > 0 and no <= 26)  dp[i] += dp[i + 2];
+                    if (no >= 10 and no <= 26)  dp[i] += dp[i + 2];
                 }
             }
         }
 
         return dp[0];
     }
-
 };

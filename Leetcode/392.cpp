@@ -1,6 +1,5 @@
 //Time complexity - O(t.size())
 //Space complexity - O(1)
-
 class Solution {
 public:
     bool isSubsequence(string s, string t) {
@@ -14,11 +13,11 @@ public:
         }
 
         return (i == n);
-
     }
 };
 
 
+//Follow Up
 //Same as above, just we've stored the result in a map for the strings for which we know the ans of isSubsequence
 //as in the test cases words are repeated, though not a good solution
 class Solution {
@@ -57,7 +56,6 @@ public:
 
             if (i >= st.size())    return true;
         }
-
 
         return false;
     }

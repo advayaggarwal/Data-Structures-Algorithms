@@ -33,6 +33,7 @@ void starter()
 	cout.tie(0);
 }
 
+//Time complexity - O((V+E)*logV) = O(ElogV)
 void dijkstra(int src, int n, vector<pii>adj[], vi &distance)
 {
 	set<pii>s; //{distance, node}, we can also use min heap
@@ -50,7 +51,6 @@ void dijkstra(int src, int n, vector<pii>adj[], vi &distance)
 		s.erase(it); //Pop
 
 		//Iterate over the neighbours of node
-
 		for (auto nbrPair : adj[node])
 		{
 			int nbr = nbrPair.first;
@@ -68,13 +68,6 @@ void dijkstra(int src, int n, vector<pii>adj[], vi &distance)
 			}
 		}
 	}
-
-	//Single source shortest distance to all other nodes
-	for (int i = 0; i < n; i++)
-	{
-		cout << "Node " << i << " " << "Distance " << distance[i] << endl;
-	}
-
 }
 
 int main()
@@ -97,6 +90,12 @@ int main()
 	}
 
 	dijkstra(0, n, adj, distance);
+
+	//Single source shortest distance to all other nodes
+	for (int i = 0; i < n; i++)
+	{
+		cout << "Node " << i << " " << "Distance " << distance[i] << endl;
+	}
 
 	return 0;
 }

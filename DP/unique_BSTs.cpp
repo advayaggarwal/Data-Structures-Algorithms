@@ -66,7 +66,7 @@ int uniqueBSTs(int n)
 
 	int ans = 0;
 
-	for (int i = 1; i <= n; i++)
+	for (int i = 1; i <= n; i++) //take i as the root node
 	{
 		ans += uniqueBSTs(i - 1) * uniqueBSTs(n - i);
 	}
@@ -84,7 +84,7 @@ int uniqueBSTsTD(int n, vi &dp)
 	if (dp[n] != -1)	return dp[n];
 
 	int ans = 0;
-	for (int i = 1; i <= n; i++)
+	for (int i = 1; i <= n; i++) //take i as the root node
 	{
 		ans += uniqueBSTsTD(i - 1, dp) * uniqueBSTsTD(n - i, dp);
 	}
