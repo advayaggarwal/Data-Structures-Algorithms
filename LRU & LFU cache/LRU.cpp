@@ -60,15 +60,19 @@ public:
 	void insertKeyValue(string key, int value)
 	{
 		//2 cases
-		if (m.count(key) != 0) //key already present, therefore only update the value
+		if (m.count(key) != 0) //key already present, therefore update the value and make it most recently used
 		{
-			m[key]->value = value;
+			Node n(key, value); //making new node
+			auto it = m[key];
+			l.erase(it); //deleting the already existent node with same key
+			l.push_front(n); //pushing the new node with new value
+			m[key] = l.begin(); //updating the address
 		}
 
 		else //key not present, insert both into hashmap and list
 		{
 			//check if cache is full or not
-			//if full remove last recently used item from cache (list + hashmap)
+			//if full remove least recently used item from cache (list + hashmap)
 			if (l.size() == maxSize)
 			{
 				Node last = l.back();
@@ -82,7 +86,7 @@ public:
 		}
 	}
 
-	int* getValue(string key) //returns the value if present and move that node to head of the list
+	int* getValue(string key) //returns the value if present and move that node to head of the list making it most recently used
 	{
 		//check if key is present
 		if (m.count(key) != 0) //means key is present, also move this key to top of the list, as it is most recently used

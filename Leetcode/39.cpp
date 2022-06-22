@@ -1,6 +1,5 @@
 class Solution {
 public:
-
     void helper(int index, int target, vector<int>&candidates, vector<int>&sol, vector<vector<int>>&res)
     {
         if (target == 0)

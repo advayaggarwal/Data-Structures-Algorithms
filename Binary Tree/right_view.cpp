@@ -1,4 +1,3 @@
-
 /*
 	AUTHOR:			ADVAY AGGARWAL
 */
@@ -155,7 +154,7 @@ res.size() < level will be false
 void rightViewRecursive(Node *root, int level, vi &res)
 {
 	if (!root)	return;
-	if (res.size() < level)	res.push_back(root->val);
+	if (res.size() == level)	res.push_back(root->val);
 
 	rightViewRecursive(root->right, level + 1, res);
 	rightViewRecursive(root->left, level + 1, res);
@@ -180,7 +179,7 @@ int main()
 
 	vi res;
 	rightView(root, res);
-	rightViewRecursive(root, 1, res);
+	rightViewRecursive(root, 0, res);
 	for (int e : res)	cout << e << " ";
 
 	return 0;

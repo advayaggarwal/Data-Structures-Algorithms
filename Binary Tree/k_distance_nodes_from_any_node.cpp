@@ -1,4 +1,3 @@
-
 /*
 	AUTHOR:			ADVAY AGGARWAL
 */
@@ -177,7 +176,6 @@ vector <int> kDistanceNodes(Node* root, int target , int k)
 
 	queue<Node*>q;
 	q.push(target_node);
-
 
 	while (!q.empty() and k)
 	{

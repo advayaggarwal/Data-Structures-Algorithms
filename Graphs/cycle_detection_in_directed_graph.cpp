@@ -56,7 +56,6 @@ bool dfs(int source, vi adj[], vector<bool> &visited, vector<bool> &dfs_visited)
 }
 
 //Using BFS, Kahn's Algorithm
-
 bool bfs(int n, vi adj[])
 {
 	vi indegree(n + 1, 0);

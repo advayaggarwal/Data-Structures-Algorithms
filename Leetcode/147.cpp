@@ -1,14 +1,3 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-
 //Time complexity - O(n^2)
 //Space complexity - O(1)
 class Solution {
@@ -24,8 +13,7 @@ public:
             if (current->next && current->next->val < current->val)
             {
                 //Insert current->next at right place
-
-                while ( prev->next && prev->next->val < current->next->val) prev = prev->next;
+                while (prev->next && prev->next->val < current->next->val) prev = prev->next;
                 //yeah we found the correct place for current->next
 
                 //Rearrangning the pointers
@@ -60,7 +48,7 @@ public:
             ListNode *prev = start;
 
             // find the position to insert the current node
-            while ( prev->next && prev->next->val < current->val) prev = prev->next;
+            while (prev->next && prev->next->val < current->val) prev = prev->next;
             //yeah we found the correct place for current->next
 
             //Rearrangning the pointers
@@ -73,8 +61,6 @@ public:
             // moving on to the next iteration
             current = cur_next;
         }
-
-
 
         return start->next;
     }

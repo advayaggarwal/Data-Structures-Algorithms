@@ -43,7 +43,7 @@ int prim_mst(int n, vector<pair<int, int>>adj[])
 
 	int ans = 0;
 
-	pq.push({0, 0}); //pq.push({0, 1});, if node starts from 1
+	pq.push({0, 0}); //temporary edge to node 0 with weight 0
 
 	while (!pq.empty())
 	{

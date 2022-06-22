@@ -63,3 +63,40 @@ public:
         reverse(p.begin(), p.end());
     }
 };
+
+//No need to store parent to find the path
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)
+    {
+        vector<TreeNode*>path1, path2;
+        findPath(root, p->val, path1);
+        findPath(root, q->val, path2);
+
+        int m = path1.size(), n = path2.size();
+
+        TreeNode *ans;
+
+        for (int i = 0, j = 0; i < m && j < n; i++, j++)
+        {
+            if (path1[i] == path2[j])    ans = path1[i];
+            else break;
+        }
+
+        return ans;
+    }
+
+    bool findPath(TreeNode *root, int key, vector<TreeNode*>&path)
+    {
+        if (!root)   return false;
+
+        path.push_back(root);
+
+        if (root->val == key)    return true;
+
+        if (findPath(root->left, key, path) or findPath(root->right, key, path)) return true;
+
+        path.pop_back();
+        return false;
+    }
+};

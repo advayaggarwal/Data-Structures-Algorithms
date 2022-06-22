@@ -1,4 +1,3 @@
-
 /*
 	AUTHOR:			ADVAY AGGARWAL
 */
@@ -165,6 +164,22 @@ int inorderSuccessor(Node *root, int target)
 	}
 
 	return ans;
+}
+
+int inorder_Successor(Node *root, int target)
+{
+	int successor = -1;
+	while (root)
+	{
+		if (root->val < target)	root = root->right;
+		else
+		{
+			successor = root->val;
+			root = root->left;
+		}
+	}
+
+	return successor;
 }
 
 /*

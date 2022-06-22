@@ -1,4 +1,3 @@
-
 /*
 	AUTHOR:			ADVAY AGGARWAL
 */
@@ -143,7 +142,6 @@ void rootToLeaf(Node *root, vi &path, vector<vi>&paths)
 		rootToLeaf(root->right, path, paths);
 		path.pop_back();
 	}
-
 }
 
 

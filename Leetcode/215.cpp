@@ -1,3 +1,4 @@
+//Using Sorting
 //Time complexity - O(nlogn)
 //Space complexity - O(1)
 class Solution {
@@ -8,7 +9,7 @@ public:
     }
 };
 
-
+//Using Quickselect
 //Time complexity - O(n), Worst case - O(n^2)
 //Space complexity - O(n)
 class Solution {
@@ -38,7 +39,7 @@ public:
     {
         int pivot = nums[h];
         int i = l - 1;
-        for (int j = l; j < h; j++)
+        for (int j = l; j <= h; j++)
         {
             if (nums[j] <= pivot)
             {
@@ -46,8 +47,8 @@ public:
                 swap(nums[i], nums[j]);
             }
         }
-        swap(nums[i + 1], nums[h]);
-        return i + 1; //index of pivot
+
+        return i; //index of pivot
     }
 };
 
@@ -81,21 +82,16 @@ public:
 //Space complexity - O(k)
 class Solution {
 public:
-    int findKthLargest(vector<int>& nums, int k) {
+    int findKthLargest(vector<int>& nums, int k)
+    {
+        priority_queue<int, vector<int>, greater<int>>minHeap;
 
-        priority_queue<int, vector<int>, greater<int>>heap;
-
-        for (int i = 0; i < nums.size(); i++)
+        for (int num : nums)
         {
-            if (i < k)  heap.push(nums[i]);
-
-            else
-            {
-                heap.push(nums[i]);
-                heap.pop();
-            }
+            minHeap.push(num);
+            if (minHeap.size() > k)  minHeap.pop();
         }
 
-        return heap.top();
+        return minHeap.top();
     }
 };

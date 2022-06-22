@@ -73,5 +73,3 @@ public:
         return slow;
     }
 };
-
-

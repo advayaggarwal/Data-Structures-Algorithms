@@ -1,4 +1,3 @@
-
 /*
 	AUTHOR:			ADVAY AGGARWAL
 */
@@ -134,8 +133,8 @@ void bottomView(Node *root, vi &res)
 		int distance = q.front().second;
 		q.pop();
 
-		//if there are multiple bottom-most nodes for the same horizontal distance then print the later one in
-		//level order traversal, that's why we keep on updating m[distance]
+		//if there are multiple nodes for the same horizontal distance then print the later one(bottom-most)
+		//in level order traversal, that's why we keep on updating m[distance]
 		m[distance] = temp->val;
 
 		if (temp->left)	q.push({temp->left, distance - 1});
@@ -171,7 +170,6 @@ int main()
 	bottomView(root, res);
 
 	for (int x : res)	cout << x << " ";
-
 
 	return 0;
 }

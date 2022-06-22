@@ -15,6 +15,5 @@ public:
 		if (root->val >= low and root->val <= high)  ans += root->val;
 		if (root->val > low) search(root->left, low, high, ans);
 		if (root->val < high)    search(root->right, low, high, ans);
-
 	}
 };

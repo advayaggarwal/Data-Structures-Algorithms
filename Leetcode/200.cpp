@@ -1,3 +1,5 @@
+//Time complexity - O(m*n)
+//Space complexity - O(m*n)
 class Solution {
 public:
     int dx[4] = { -1, 1, 0, 0};

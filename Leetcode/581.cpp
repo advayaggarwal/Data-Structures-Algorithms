@@ -1,46 +1,36 @@
+//Time complexity - O(n)
+//Space complexity - O(1)
 class Solution {
 public:
-    int findUnsortedSubarray(vector<int>& nums) {
+    int findUnsortedSubarray(vector<int>& nums)
+    {
         int n = nums.size();
         if (n == 1)    return 0;
-
-        int start, end;
-        int max = INT_MIN, min = INT_MAX;
-        for ( start = 1; start < n; start++)
-        {
-            if (nums[start] < nums[start - 1]) {
-                min = std::min(min, nums[start]);
-            }
-        }
-
-
-        for ( end = n - 2; end >= 0; end--)
-        {
-            if (nums[end] > nums[end + 1])
-            {
-                max = std::max(max, nums[end]);
-            }
-        }
-
-
+        int smallest = INT_MAX, largest = INT_MIN;
         for (int i = 0; i < n; i++)
         {
-            if (nums[i] > min)
+            if (outOfOrder(i, n, nums))
             {
-                start = i;
-                break;
+                smallest = min(smallest, nums[i]);
+                largest = max(largest, nums[i]);
             }
         }
 
-        for (int i = n - 1; i >= 0; i--)
-        {
-            if (nums[i] < max)
-            {
-                end = i;
-                break;
-            }
-        }
+        if (smallest == INT_MAX) return 0;
 
-        return end - start >= 0 ? (end - start + 1) : 0;
+        int i = 0;
+        while (i < n && nums[i] <= smallest) i++;
+        int j = n - 1;
+        while (j >= 0 && nums[j] >= largest) j--;
+
+        return j - i + 1;
+    }
+
+    bool outOfOrder(int i, int n, vector<int>&nums)
+    {
+        if (i == 0)  return nums[i] > nums[i + 1];
+        if (i == n - 1)    return nums[i] < nums[i - 1];
+
+        return (nums[i] > nums[i + 1]) or (nums[i] < nums[i - 1]);
     }
 };

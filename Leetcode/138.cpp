@@ -1,19 +1,3 @@
-/*
-// Definition for a Node.
-class Node {
-public:
-    int val;
-    Node* next;
-    Node* random;
-
-    Node(int _val) {
-        val = _val;
-        next = NULL;
-        random = NULL;
-    }
-};
-*/
-
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
@@ -53,9 +37,9 @@ public:
             if (copy->next)  copy->next = copy->next->next;
             iter = iter->next;
         }
+
         return pseudohead;
     }
-
 };
 
 
@@ -99,10 +83,8 @@ public:
             temp->next = temp->next->next;
             if (p->next) p->next = p->next->next;
             temp = temp->next;
-
         }
 
         return copy_head;
-
     }
 };

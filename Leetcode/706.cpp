@@ -1,4 +1,6 @@
 //Simply using vector
+//Time complexity - O(1)
+//Space complexity - O(n)
 class MyHashMap {
 public:
     vector<int>v;
@@ -19,7 +21,9 @@ public:
     }
 };
 
-//Using vector of linked list - Chaining
+//Using vector of linked list - Chaining, actual hash map concept
+//Time complexity - O(n), average O(1)
+//Space complexity - O(n)
 class MyHashMap {
 public:
     vector<list<pair<int, int>>>m;

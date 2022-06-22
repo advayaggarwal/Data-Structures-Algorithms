@@ -37,7 +37,7 @@ void starter()
 //Time complexity - O(s^n), n is number of denominations and s is the target amount.
 int coinChange(vi &denominations, int target)
 {
-	if (target < 0 )	return -1;
+	if (target < 0)	return -1;
 
 	if (target == 0)	return 0;
 

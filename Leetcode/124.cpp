@@ -1,30 +1,23 @@
+//Time complexity - O(n)
+//Space complexity - O(n)
 class Solution {
 public:
-    int maxPathSum(TreeNode* root) {
-
+    int maxPathSum(TreeNode* root)
+    {
         int res = INT_MIN;
-
         helper(root, res);
-
         return res;
     }
-
 
     int helper(TreeNode *root, int &res)
     {
         if (!root) return 0;
 
-        int l = helper(root->left, res);
-        int r = helper(root->right, res);
+        int l = max(0, helper(root->left, res));
+        int r = max(0, helper(root->right, res));
 
-        int temp = max(max(l, r) + root->val, root->val);
+        res = max(res, root->val + l + r);
 
-        int ans = max(temp, l + r + root->val);
-
-        res = max(res, ans);
-
-        return temp;
-
+        return root->val + max(l, r);
     }
-
 };

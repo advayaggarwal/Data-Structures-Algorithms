@@ -1,4 +1,6 @@
-a a b b 
-a a bb 
-aa b b 
-aa bb 
+abc
+acb
+bac
+bca
+cba
+cab

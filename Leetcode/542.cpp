@@ -1,4 +1,4 @@
-//BFS - Shortest path algorithm
+//Multisource BFS - Shortest path algorithm
 class Solution {
 public:
     vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {

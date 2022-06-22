@@ -1,3 +1,5 @@
+//Time complexity - O(E*logE)
+//Space complexity - O(V+E)
 class Solution {
 public:
     vector<string> findItinerary(vector<vector<string>>& tickets) {

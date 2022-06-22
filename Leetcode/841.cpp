@@ -1,4 +1,4 @@
-//Apply DFS from room 0, if all visited return true, else return false
+//Apply DFS or BFS from room 0, if all visited return true, else return false
 class Solution {
 public:
     bool canVisitAllRooms(vector<vector<int>>& rooms)

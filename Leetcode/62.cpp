@@ -1,4 +1,4 @@
-//Recursion Bottom Up
+//Recursion Top Down
 //Time complexity - O(2^(m*n))
 class Solution {
 public:
@@ -9,7 +9,6 @@ public:
         return uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
     }
 };
-
 
 //Recursion Top Down
 class Solution {
@@ -36,14 +35,12 @@ class Solution {
 public:
     int uniquePaths(int m, int n) {
         vector<vector<int>>dp(m, vector<int>(n, -1));
-        dp[m - 1][n - 1] = 1;
         return helper(0, 0, m, n, dp);
     }
 
     int helper(int i, int j, int m, int n, vector<vector<int>>&dp)
     {
-        if (i >= m)    return 0;
-        if (j >= n)    return 0;
+        if (i == m - 1 or j == n - 1)    return 1;
 
         if (dp[i][j] != -1)    return dp[i][j];
 

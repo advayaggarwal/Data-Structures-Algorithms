@@ -2,25 +2,25 @@
 //Space complexity - O(n)
 class Solution {
 public:
-    unordered_map<int, int>index;
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-
-        int n = inorder.size();
-        int start = 0;
-        for (int i = 0; i < n; i++)  index[inorder[i]] = i;
-        return build(preorder, inorder, start, 0, n - 1);
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder)
+    {
+        int n = preorder.size();
+        unordered_map<int, int>m;
+        for (int i = 0; i < n; i++)  m[inorder[i]] = i;
+        return build(preorder, 0, n - 1, inorder, 0, n - 1, m);
     }
 
-    TreeNode* build(vector<int>& preorder, vector<int>& inorder, int &start, int ins, int ine)
+    TreeNode* build(vector<int>&preorder, int preStart, int preEnd, vector<int>&inorder, int inStart, int inEnd, unordered_map<int, int>&m)
     {
-        if (ins > ine)   return NULL;
+        if (preStart > preEnd or inStart > inEnd)    return NULL;
 
-        TreeNode *root = new TreeNode(preorder[start]);
-        int mid = index[preorder[start]];
-        start++;
+        TreeNode *root = new TreeNode(preorder[preStart]);
 
-        root->left = build(preorder, inorder, start, ins, mid - 1);
-        root->right = build(preorder, inorder, start, mid + 1, ine);
+        int inRoot = m[preorder[preStart]];
+        int numsLeft = inRoot - inStart;
+
+        root->left = build(preorder, preStart + 1, preStart + numsLeft, inorder, inStart, inRoot - 1, m);
+        root->right = build(preorder, preStart + numsLeft + 1, preEnd, inorder, inRoot + 1, inEnd, m);
 
         return root;
     }

@@ -1,6 +1,5 @@
 //Time complexity - O(n)
 //Space complexity - O(n)
-
 class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
@@ -24,7 +23,6 @@ public:
 
 //Time complexity - O(k), not doing complete inorder traversal, as soon as we get the kth element, we stop
 //Space complexity - O(1)
-
 class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {

@@ -4,7 +4,6 @@ https://leetcode.com/problems/search-in-rotated-sorted-array/discuss/154836/The-
 */
 
 //ALL ELEMENTS SHOULD BE UNIQUE
-
 class Solution {
 public:
 	int search(vector<int>& nums, int target)
@@ -39,7 +38,6 @@ public:
 
 
 //Aditya Verma approach
-
 class Solution {
 public:
 	int search(vector<int>& nums, int target) {
@@ -77,13 +75,10 @@ public:
 		return max(index1, index2);
 
 	}
-
 };
 
 
-
 //MyCodeSchool approach
-
 class Solution {
 public:
 	int search(vector<int>& nums, int target) {
@@ -111,5 +106,4 @@ public:
 
 		return -1;
 	}
-
 };

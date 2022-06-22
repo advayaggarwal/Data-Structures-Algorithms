@@ -6,7 +6,7 @@ public:
 	int lengthOfLongestSubstring(string s) {
 		int n = s.size();
 
-		int ans = INT_MIN;
+		int ans = 0;
 
 		for (int i = 0; i < n; i++)
 		{
@@ -21,52 +21,43 @@ public:
 			}
 		}
 
-		return ans == INT_MIN ? 0 : ans;
+		return ans;
 	}
 };
 
 
 //Sliding Window
-//Time complexity - O(n), 2 pass solution
+//Time complexity - O(n), 2 pass solution, both i and j are moving from 0 to n
 //Space complexity - O(256)
-
 class Solution {
 public:
-	int lengthOfLongestSubstring(string s) {
-
-		int n = s.size();
+	int lengthOfLongestSubstring(string s)
+	{
 		unordered_map<char, int>m;
-		int mx = INT_MIN;
-		int i = 0, j = 0;
+		int i = 0, j = 0, n = s.size();
+		int ans = 0;
 		while (j < n)
 		{
 			m[s[j]]++;
-			if (m.size() == j - i + 1) //# unique chars equal to the window size i.e. all chars in that window are unique
-			{
-				mx = max(mx, j - i + 1);
-				j++;
-			}
+			if (m.size() == j - i + 1)    ans = max(ans, j - i + 1); //#unique chars equal to the window size i.e. all chars in that window are unique
 			else
 			{
-				while (m.size() < j - i + 1) //window size is greater than # unique chars i.e. some chars are repeating
+				while (m.size() != j - i + 1) //window size is greater than # unique chars i.e. some chars are repeating
 				{
 					m[s[i]]--;
-					if (m[s[i]] == 0)	m.erase(s[i]);
+					if (m[s[i]] == 0) m.erase(s[i]);
 					i++;
 				}
-
-				if (m.size() == j - i + 1)	mx = max(mx, j - i + 1);
-				j++;
 			}
+			j++;
 		}
 
-		return mx == INT_MIN ? 0 : mx;
+		return ans;
 	}
 };
 
 
 //OR, shorter code
-
 class Solution {
 public:
 	int lengthOfLongestSubstring(string s) {

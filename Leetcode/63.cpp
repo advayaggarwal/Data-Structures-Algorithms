@@ -5,34 +5,19 @@ class Solution {
 public:
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
     {
-        int m = obstacleGrid.size();
-        int n = obstacleGrid[0].size();
-        if (obstacleGrid[m - 1][n - 1] == 1 or obstacleGrid[0][0] == 1)   return 0;
-        vector<vector<int>>dp(m + 1, vector<int>(n + 1, -1));
+        int m = obstacleGrid.size(), n = obstacleGrid[0].size();
+        vector<vector<int>>dp(m, vector<int>(n, -1));
 
-        return helper(m, n, obstacleGrid, dp);
+        return helper(m - 1, n - 1, obstacleGrid, dp);
     }
 
     int helper(int m, int n, vector<vector<int>>& obstacleGrid, vector<vector<int>>&dp)
     {
-        if (m < 1 or n < 1)    return 0;
-
-        if (m == 1 && n == 1)
-        {
-            return  obstacleGrid[m - 1][n - 1] == 1 ? 0 : 1;
-        }
-
+        if (m == 0 && n == 0)    return obstacleGrid[m][n] == 0;
+        if (m < 0 or n < 0 or obstacleGrid[m][n] == 1)  return 0;
         if (dp[m][n] != -1)  return dp[m][n];
 
-        int op1, op2;
-
-        if (m >= 2 && n >= 1 && obstacleGrid[m - 2][n - 1] == 1)   op1 = 0;
-        else op1 = helper(m - 1, n, obstacleGrid, dp);
-
-        if (m >= 1 && n >= 2 && obstacleGrid[m - 1][n - 2] == 1)   op2 = 0;
-        else    op2 = helper(m, n - 1, obstacleGrid, dp);
-
-        return dp[m][n] = op1 + op2;
+        return dp[m][n] = helper(m - 1, n, obstacleGrid, dp) + helper(m, n - 1, obstacleGrid, dp);
     }
 };
 
@@ -43,29 +28,22 @@ class Solution {
 public:
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
     {
-        int m = obstacleGrid.size();
-        int n = obstacleGrid[0].size();
-
-        vector<vector<int>>dp(m, vector<int>(n, 0));
-
-        for (int i = 0; i < n; i++)
-        {
-            if (obstacleGrid[0][i] == 0) dp[0][i] = 1;
-            else break;
-        }
+        int m = obstacleGrid.size(), n = obstacleGrid[0].size();
+        vector<vector<int>>dp(m, vector<int>(n));
 
         for (int i = 0; i < m; i++)
         {
-            if (obstacleGrid[i][0] == 0) dp[i][0] = 1;
-            else break;
-        }
-
-        for (int i = 1; i < m; i++)
-        {
-            for (int j = 1; j < n; j++)
+            for (int j = 0; j < n; j++)
             {
-                if (obstacleGrid[i][j] == 1) dp[i][j] = 0;
-                else dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+                if (i == 0 && j == 0)   dp[i][j] = 1;
+                else if (obstacleGrid[i][j] == 0)
+                {
+                    int up = 0, left = 0;
+                    if (i > 0)   up = dp[i - 1][j];
+                    if (j > 0)   left = dp[i][j - 1];
+
+                    dp[i][j] = up + left;
+                }
             }
         }
 

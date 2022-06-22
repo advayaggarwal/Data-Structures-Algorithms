@@ -28,7 +28,7 @@ public:
     }
 };
 
-//In one word, this problem is asking us to find the common prefix of left and right 's binary code.
+//In one word, this problem is asking us to find the common prefix of left and right's binary code.
 //Time complexity - O(32), i.e O(logn)
 //Space complexity - O(1)
 class Solution {
@@ -43,7 +43,7 @@ public:
 
             else //this bit is same in both left and right
             {
-                ans |= (left & (1 << bit)); //&& with left because this bit can be 0 in both left and right
+                ans |= (left & (1 << bit)); //& with left because this bit can be 0 in both left and right
             }
         }
 

@@ -36,7 +36,7 @@ void starter()
 //Time complexity - exponential
 int mcm(vi &arr, int i, int j)
 {
-	if (i >= j)	return 0; //We need two dimensions to make a matrix
+	if (i >= j)	return 0; //Single matrix if i==j with dimension arr[i-1]*arr[j], therefore cost will be 0
 
 	int ans = INT_MAX;
 
@@ -98,6 +98,8 @@ int mcmTD(vi &arr, int i, int j, vvi &dp)
 	return dp[i][j] = ans;
 }
 
+//Time complexity - O(n^3)
+//Space complexity - O(n^2)
 int mcmBU(vi &arr)
 {
 	int n = arr.size();
@@ -119,6 +121,29 @@ int mcmBU(vi &arr)
 	}
 
 	return dp[1][n - 1];
+}
+
+//Bottom Up, iterate the changing params in opposite fashion and copy the recurrence
+//Time complexity - O(n^3)
+//Space complexity - O(n^2)
+int matrixMultiplication(vector<int> &arr, int N)
+{
+	vector<vector<int>>dp(N, vector<int>(N, INT_MAX));
+	for (int i = 0; i < N; i++)	dp[i][i] = 0;
+
+	for (int i = N - 1; i > 0; i--)
+	{
+		for (int j = i + 1; j < N; j++)
+		{
+			for (int k = i; k <= j - 1; k++)
+			{
+				int cost = arr[i - 1] * arr[k] * arr[j];
+				dp[i][j] = min(dp[i][j], cost + dp[i][k] + dp[k + 1][j]);
+			}
+		}
+	}
+
+	return dp[1][N - 1];
 }
 
 int main()

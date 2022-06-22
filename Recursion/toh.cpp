@@ -36,15 +36,15 @@ void toh(int n, char s, char d, char h)
 
 int toh(int n, char source, char destination, char helper)
 {
-	if(n==1)
+	if (n == 1)
 	{
-		cout<<"Move "<<n<<"th disk from "<<source<<" to "<<destination<<endl;
+		cout << "Move " << n << "th disk from " << source << " to " << destination << endl;
 		return 1;
 	}
-	
-	int count1 = toh(n-1, source, helper, destination);
-	cout<<"Move "<<n<<"th disk from "<<source<<" to "<<destination<<endl;
-	int count2 = toh(n-1, helper, destination, source);
+
+	int count1 = toh(n - 1, source, helper, destination);
+	cout << "Move " << n << "th disk from " << source << " to " << destination << endl;
+	int count2 = toh(n - 1, helper, destination, source);
 	return count1 + count2 + 1;
 }
 

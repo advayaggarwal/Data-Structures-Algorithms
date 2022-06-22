@@ -70,6 +70,10 @@ int countSubsets(vi &arr, int target)
     And, s2 = (sum-difference)/2
 
     Therefore question boils down to count the subsets with sum s1 or s2
+
+    Just check the edge cases like (sum-difference) >= 0 if all integers are non negative and
+    (sum-difference) should be even, as all are integers so s2(sum of one subset) will also be an integer
+    s2 = (sum-difference)/2 should be integer
 */
 
 int countSubsetsWithGivenDifference(vi &arr, int difference)
@@ -77,6 +81,8 @@ int countSubsetsWithGivenDifference(vi &arr, int difference)
 	int sum = 0;
 
 	for (int e : arr)	sum += e;
+
+	if (sum - difference < 0 or (sum - difference) % 2)	return 0;
 
 	return countSubsets(arr, (sum + difference) / 2);
 }

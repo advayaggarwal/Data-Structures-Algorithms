@@ -1,4 +1,3 @@
-
 /*
 	AUTHOR:			ADVAY AGGARWAL
 */
@@ -125,13 +124,13 @@ void leftBoundary(Node *root, vi &res)
 {
 	if (!root)	return;
 
-	if (root->left or root->right)	res.push_back(root->val); //root not a leaf node as will be covered in leaf nodes
+	if (root->left or root->right)	res.push_back(root->val); //root not a leaf node
 
 	if (root->left)	leftBoundary(root->left, res); //preference is given to the left
 	else leftBoundary(root->right, res);
 }
 
-//Do any traversal, if leaf node push into the res
+//Do any DFS traversal, if leaf node push into the res, don't do level order, it may give wrong result
 void leafNodes(Node *root, vi &res) //using inorder
 {
 	if (!root)	return;
@@ -149,7 +148,7 @@ void reverseRightBoundary(Node *root, vi &res)
 	if (root->right)	reverseRightBoundary(root->right, res);
 	else reverseRightBoundary(root->left, res);
 
-	if (root->left or root->right)	res.push_back(root->val); //root not a leaf node as will be covered in leaf nodes
+	if (root->left or root->right)	res.push_back(root->val); //root not a leaf node
 
 }
 
@@ -171,16 +170,12 @@ int main() //O(n), where n is the number of nodes
 	Node* root = buildTree(s);
 
 	vi res;
-	res.push_back(root->val);
+	if (root->left or root->right)	res.push_back(root->val); //not a leaf node
+	//if it's a leaf, it will get covered in leafNodes
 
-	//i.e. tree doesn't contain only 1 node, otherwise it will come twice, in line 161 and again in leaf nodes
-
-	if (root->left or root->right)
-	{
-		leftBoundary(root->left, res);
-		leafNodes(root, res);
-		reverseRightBoundary(root->right, res);
-	}
+	leftBoundary(root->left, res);
+	leafNodes(root, res);
+	reverseRightBoundary(root->right, res);
 
 	cout << res;
 	return 0;

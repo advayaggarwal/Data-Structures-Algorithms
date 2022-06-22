@@ -93,3 +93,30 @@ public:
         return dp[i][buyOrSell][k] = max(noTransact, transact);
     }
 };
+
+//Bottom Up DP
+//Time complexity - O(n*2*k)
+//Space complexity - O(n*2*k)
+class Solution {
+public:
+    int maxProfit(int k, vector<int>& prices)
+    {
+        int n = prices.size();
+        int dp[n + 1][2][k + 1];
+        memset(dp, 0, sizeof(dp));
+
+        for (int i = n - 1; i >= 0; i--)
+        {
+            for (int buy = 0; buy <= 1; buy++)
+            {
+                for (int k1 = 1; k1 <= k; k1++)
+                {
+                    if (buy) dp[i][buy][k1] = max(-prices[i] + dp[i + 1][0][k1], dp[i + 1][1][k1]);
+                    else    dp[i][buy][k1] = max(prices[i] + dp[i + 1][1][k1 - 1], dp[i + 1][0][k1]);
+                }
+            }
+        }
+
+        return dp[0][1][k];
+    }
+};

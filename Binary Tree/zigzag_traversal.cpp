@@ -1,4 +1,3 @@
-
 /*
 	AUTHOR:			ADVAY AGGARWAL
 */
@@ -139,12 +138,12 @@ void zigzag(Node *root)
 		{
 			Node *temp = q.front();
 			q.pop();
-			level[i] = temp->val;
+
+			int index = flag ? i : n - 1 - i;
+			level[index] = temp->val;
 			if (temp->left)	q.push(temp->left);
 			if (temp->right)	q.push(temp->right);
 		}
-
-		if (!flag)	reverse(level.begin(), level.end());
 
 		for (int i = 0; i < n; i++)	cout << level[i] << " ";
 		flag = !flag;
@@ -172,7 +171,6 @@ void zigZag(Node *root)
 
 		for (int i = 0; i < n; i++)
 		{
-
 			Node *temp;
 
 			// popping mechanism
@@ -221,14 +219,11 @@ void zigZag(Node *root)
 		}
 
 		ltr = !ltr;
-
 	}
-
 }
 
-
 // With 2 stacks
-void zigZag(Node *root)
+void ZigZag(Node *root)
 {
 	stack<Node*>s1, s2;
 	s1.push(root);
@@ -255,7 +250,6 @@ void zigZag(Node *root)
 			if (temp->left)	s1.push(temp->left);
 		}
 	}
-
 }
 
 /*
@@ -271,12 +265,15 @@ void zigZag(Node *root)
 int main()
 {
 	starter();
-	string s = "1 2 3 4 5 N 6"; //fill string level by level, and for NULL put N
+	string s; // "1 2 3 4 5 N 6", fill string level by level, and for NULL put N
+	getline(cin, s);
 
 	Node* root = buildTree(s);
 	zigzag(root);
 	cout << endl;
 	zigZag(root);
+	cout << endl;
+	ZigZag(root);
 
 	return 0;
 }

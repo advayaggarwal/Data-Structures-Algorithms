@@ -1,4 +1,3 @@
-
 /*
 	AUTHOR:			ADVAY AGGARWAL
 */
@@ -122,7 +121,6 @@ Node* buildTree(string str)
 
 Node* LCA(Node *root, const int &n1, const int &n2)
 {
-
 	if (!root)	return NULL;
 
 	if (root->val > n1 and root->val > n2)	return LCA(root->left, n1, n2);

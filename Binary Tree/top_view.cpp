@@ -1,4 +1,3 @@
-
 /*
 	AUTHOR:			ADVAY AGGARWAL
 */
@@ -127,7 +126,7 @@ void topView(Node *root, vi &res)
 
 	queue<pair<Node*, int>>q; //{Node*, horizontal distance}
 	q.push({root, 0});
-	map<int, int>m;
+	map<int, int>m; //{horizontal distance, node}
 	while (!q.empty())
 	{
 		Node *temp = q.front().first;

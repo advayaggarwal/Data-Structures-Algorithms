@@ -20,53 +20,86 @@ public:
         this->capacity = capacity;
     }
 
-    int get(int key) {
-        if (m.count(key) != 0)
+    int get(int key) //O(1)
+    {
+        if (m.count(key))
         {
             auto it = m[key];
-
             l.push_front(*it);
-
-            m[key] = l.begin();
-
             l.erase(it);
-
+            m[key] = l.begin();
             return l.begin()->value;
         }
 
         return -1;
     }
 
-    void put(int key, int value) {
-
-        if (m.count(key) != 0)
+    void put(int key, int value) //O(1)
+    {
+        if (m.count(key)) //key exists, so delete it first
         {
             auto it = m[key];
-            it->value = value;
-            l.push_front(*it);
             l.erase(it);
-            m[key] = l.begin();
-
         }
+
         else
         {
-            if (l.size() == capacity)
+            if (l.size() == capacity) //already full, delete least recently used
             {
                 m.erase(l.back().key);
                 l.pop_back();
             }
-
-            Node n(key, value);
-
-            l.push_front(n);
-            m[key] = l.begin();
         }
+
+        Node n(key, value);
+        l.push_front(n);
+        m[key] = l.begin();
     }
 };
 
-/**
- * Your LRUCache object will be instantiated and called as such:
- * LRUCache* obj = new LRUCache(capacity);
- * int param_1 = obj->get(key);
- * obj->put(key,value);
- */
+//Without using Node class, by making list of pair<int,int>
+class LRUCache {
+public:
+    int capacity;
+    list<pair<int, int>>l; //{key, value}
+    unordered_map<int, list<pair<int, int>>::iterator>m;
+
+    LRUCache(int capacity) {
+        this->capacity = capacity;
+    }
+
+    int get(int key) //O(1)
+    {
+        if (m.count(key))
+        {
+            auto it = m[key];
+            l.push_front(*it);
+            l.erase(it);
+            m[key] = l.begin();
+            return l.begin()->second;
+        }
+
+        return -1;
+    }
+
+    void put(int key, int value) //O(1)
+    {
+        if (m.count(key)) //key exists, so delete it first
+        {
+            auto it = m[key];
+            l.erase(it);
+        }
+
+        else
+        {
+            if (l.size() == capacity) //already full, delete least recently used
+            {
+                m.erase(l.back().first);
+                l.pop_back();
+            }
+        }
+
+        l.push_front({key, value});
+        m[key] = l.begin();
+    }
+};

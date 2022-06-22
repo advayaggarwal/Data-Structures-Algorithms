@@ -7,9 +7,7 @@ public:
     {
         vector<int>grundy(n + 1, -1);
 
-        int ans = calculateGrundy(n, grundy);
-
-        return ans != 0;
+        return calculateGrundy(n, grundy);
     }
 
     int calculateGrundy(int n, vector<int> &grundy)

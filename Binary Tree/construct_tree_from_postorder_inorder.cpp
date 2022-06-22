@@ -1,4 +1,3 @@
-
 /*
 	AUTHOR:			ADVAY AGGARWAL
 */
@@ -59,7 +58,6 @@ unordered_map<int, int>idx;
 
 Node* buildTree(vi &postorder, vi &inorder, int &curr, int ins, int ine)
 {
-
 	if (ine < ins)	return NULL;
 
 	Node *root = new Node(postorder[curr]);

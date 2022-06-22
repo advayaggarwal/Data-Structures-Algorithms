@@ -56,7 +56,6 @@ bool findPath(vector<vi> &grid, vector<vi> &sol, int i, int j, int n)
 	}
 
 	return false;
-
 }
 
 

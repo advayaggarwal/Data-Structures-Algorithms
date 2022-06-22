@@ -80,24 +80,67 @@ int lisTD(vi &v, int index, int n, int prev, vvi &dp)
 	return max(inc, exc);
 }
 
+//Top Down DP
+//Time complexity - O(n^2)
+//Space complexity - O(n)
+int lis(vi &v, int i, vi &dp)
+{
+	if (dp[i] != -1)	return dp[i];
+	int ans = 1;
+	for (int j = 0; j < i; j++)
+	{
+		if (v[i] > v[j])	ans = max(ans, lis(v, j, dp) + 1);
+	}
+
+	return dp[i] = ans;
+}
+
 //Bottom Up DP
 //Time complexity - O(n^2)
 //Space complexity - O(n)
 int lisBU(vi &v, int n)
 {
 	vi dp(n, 1); //dp[i] denotes the length of LIS ending at index i
-
+	vi hash(n); //for printing LIS
 	for (int i = 1; i < n; i++)
 	{
+		hash[i] = i;
 		for (int j = 0; j < i; j++)
 		{
-			if (v[j] < v[i])	dp[i] = max(dp[i], 1 + dp[j]);
+			if (v[j] < v[i] && 1 + dp[j] > dp[i])
+			{
+				dp[i] = 1 + dp[j];
+				hash[i] = j;
+			}
 		}
 	}
 
-	return *max_element(dp.begin(), dp.end());
+	//Using hash vector we can print the LIS
+
+	int lisLength = 0, lastIndex;
+	for (int i = 0; i < n; i++)
+	{
+		if (dp[i] > lisLength)
+		{
+			lisLength = dp[i];
+			lastIndex = i;
+		}
+	}
+
+	vi lis;
+	lis.push_back(v[lastIndex]);
+	while (hash[lastIndex] != lastIndex)
+	{
+		lastIndex = hash[lastIndex];
+		lis.push_back(v[lastIndex]);
+	}
+
+	reverse(lis.begin(), lis.end());
+	cout << "LIS is " << lis << endl;
+	return lisLength;
 }
 
+//Using Binary Search
 //Time complexity - O(n*logn)
 //Space complexity - O(n)
 int lengthOfLIS(vector<int>& nums) {
@@ -113,6 +156,7 @@ int lengthOfLIS(vector<int>& nums) {
 
 		else
 		{
+			//for non-decreasing use upper_bound
 			int index = lower_bound(sub.begin(), sub.end(), num) - sub.begin();
 			sub[index] = num;
 		}

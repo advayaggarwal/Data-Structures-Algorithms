@@ -28,6 +28,37 @@ public:
     }
 };
 
+//Using res string as stack
+//Time complexity - O(n)
+//Space complexity - O(1)
+class Solution {
+public:
+    bool backspaceCompare(string s, string t)
+    {
+        s = modifyString(s);
+        t = modifyString(t);
+
+        return s == t;
+    }
+
+    string modifyString(string s)
+    {
+        int n = s.size();
+        string res;
+        for (int i = 0; i < n; i++)
+        {
+            if (s[i] != '#') res += s[i];
+
+            else
+            {
+                if (res.size() > 0)  res.pop_back();
+            }
+        }
+
+        return res;
+    }
+};
+
 /*
 Can you do it in O(N) time and O(1) space?
 I believe you have one difficulty here:

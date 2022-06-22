@@ -1,3 +1,6 @@
+//Using Levelorder Traveral
+//Time complexity - O(nlogn)
+//Space complexity - O(n)
 class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
@@ -39,6 +42,40 @@ public:
         }
 
         return ans;
+    }
+};
 
+//Using Preorder Traveral
+//Time complexity - O(nlogn)
+//Space complexity - O(n)
+class Solution {
+public:
+    vector<vector<int>> verticalTraversal(TreeNode* root)
+    {
+        map<int, map<int, multiset<int>>>m; //{distance, {level, nodes}}
+        preorder(root, 0, 0, m);
+
+        vector<vector<int>>res;
+
+        for (auto p : m)
+        {
+            vector<int>t;
+            for (auto e : p.second)
+            {
+                for (int x : e.second)    t.push_back(x);
+            }
+            res.push_back(t);
+        }
+
+        return res;
+    }
+
+    void preorder(TreeNode *root, int level, int distance, map<int, map<int, multiset<int>>>&m)
+    {
+        if (!root)   return;
+
+        m[distance][level].insert(root->val);
+        preorder(root->left, level + 1, distance - 1, m);
+        preorder(root->right, level + 1, distance + 1, m);
     }
 };

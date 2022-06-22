@@ -1,3 +1,5 @@
+//Time complexity - O(k), where k is #set bits
+//Space complexity - O(1)
 class Solution {
 public:
 	int hammingWeight(uint32_t n) {
@@ -13,6 +15,8 @@ public:
 	}
 };
 
+//Time complexity - O(32) or O(logn), i.e. max bits in n
+//Space complexity - O(1)
 class Solution {
 public:
 	int hammingWeight(uint32_t n)
@@ -25,5 +29,14 @@ public:
 		}
 
 		return count;
+	}
+};
+
+//Using STL
+class Solution {
+public:
+	int hammingWeight(uint32_t n)
+	{
+		return __builtin_popcount(n);
 	}
 };

@@ -30,16 +30,10 @@ int partition(int arr[], int low, int high)
 		if (arr[j] <= pivot)
 		{
 			pi++;
-			//swap(arr[pi],arr[j])
-			int temp = arr[j];
-			arr[j] = arr[pi];
-			arr[pi] = temp;
+			swap(arr[pi],arr[j]);
 		}
 	}
-	//swap(arr[i+1],arr[high]) arr[high] is pivot only, i.e. we have found the correct position for pivot
-	// int t = arr[pi + 1];
-	// arr[pi + 1] = arr[high];
-	// arr[high] = t;
+	//swap(arr[pi+1],arr[high]) arr[high] is pivot only, i.e. we have found the correct position for pivot
 	//return pi+1;
 	return pi;
 }

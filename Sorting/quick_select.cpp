@@ -67,7 +67,6 @@ int quickSelect(vi &arr, int lo, int hi, int k)
 	}
 
 	else return -1; //if k is out of bound
-
 }
 
 int main()
@@ -80,7 +79,7 @@ int main()
 	test_cases(t)
 	{
 		cin >> k;
-		k--; //for 1 based indexing
+		k--; //for 0 based indexing
 		cout << quickSelect(arr, 0, n - 1, k) << endl;
 	}
 	return 0;

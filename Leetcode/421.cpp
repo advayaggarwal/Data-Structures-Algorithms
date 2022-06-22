@@ -1,8 +1,8 @@
 //Time complexity - O(n)
 class Node {
 public:
-    Node *z;
-    Node *o;
+    Node *z; //pointer to 0
+    Node *o; //pointer to 1
 };
 
 class Trie {

@@ -4,7 +4,6 @@ public:
 
     void helper(int index, int target, int k, vector<int>&nums, vector<int>&sol, vector<vector<int>>&res)
     {
-
         if (target == 0  and sol.size() == k) //we've to take k elements
         {
             res.push_back(sol);

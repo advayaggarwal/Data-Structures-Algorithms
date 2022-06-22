@@ -75,7 +75,7 @@ public:
         int l1 = find(x, leader);
         int l2 = find(y, leader);
 
-        if (l1 == l2)    return ;
+        if (l1 == l2)    return;
 
         if (rank[l1] < rank[l2]) leader[l1] = l2;
         else if (rank[l1] > rank[l2])    leader[l2] = l1;
@@ -84,6 +84,5 @@ public:
             leader[l1] = l2;
             rank[l2]++;
         }
-
     }
 };

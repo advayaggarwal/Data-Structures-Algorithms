@@ -1,3 +1,5 @@
+//Time complexity - O(n*logn*n!)
+//Space complexity - O(# unique permutations)
 //Using set
 class Solution {
 public:
@@ -31,6 +33,8 @@ public:
 };
 
 //Using unordered set, though we have to come up with the hash, i.e have to overload () operator
+//Time complexity - O(n*n!)
+//Space complexity - O(# unique permutations)
 class Solution {
 public:
 
@@ -76,6 +80,8 @@ public:
 
 
 //Optimised solution
+//Time complexity - O(n*n!)
+//Space complexity - O(n)
 class Solution {
 public:
 
@@ -104,6 +110,34 @@ public:
         vector<vector<int>>ans;
         helper(nums, 0, ans);
         return ans;
+    }
+};
 
+//Time complexity - O(n*n!)
+//Space complexity - O(n), considering stack space, else O(1)
+class Solution {
+public:
+    vector<vector<int>> permuteUnique(vector<int>& nums)
+    {
+        vector<vector<int>>ans;
+        sort(nums.begin(), nums.end());
+        helper(0, nums, ans);
+        return ans;
+    }
+
+    void helper(int i, vector<int>nums, vector<vector<int>>&ans)
+    {
+        if (i == nums.size())
+        {
+            ans.push_back(nums);
+            return;
+        }
+
+        for (int j = i; j < nums.size(); j++)
+        {
+            if (j != i && nums[i] == nums[j])  continue;
+            swap(nums[i], nums[j]);
+            helper(i + 1, nums, ans);
+        }
     }
 };

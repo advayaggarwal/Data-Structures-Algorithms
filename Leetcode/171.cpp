@@ -21,7 +21,6 @@ class Solution {
 public:
     int titleToNumber(string columnTitle) {
         int n = columnTitle.size();
-        int p = 0;
         int ans = 0;
         for (int i = 0; i < n; i++)
         {

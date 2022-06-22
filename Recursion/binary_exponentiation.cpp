@@ -67,7 +67,6 @@ int main()
 	starter();
 	int a, b;
 	cin >> a >> b;
-	cout << powerModulo(a, b) << endl;
-	cout << binaryExponentiation(a, b);
+	cout << powerModulo(a, b) << endl << binaryExponentiation(a, b);
 	return 0;
 }

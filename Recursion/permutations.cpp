@@ -32,7 +32,7 @@ void starter()
 	cout.tie(0);
 }
 
-void permutations(string ip, int index, int n, vector<string>&res) //O(n*n!)
+void permutations(string &ip, int index, int n, vector<string>&res) //O(n*n!)
 {
 	if (index == n)
 	{

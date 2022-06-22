@@ -7,7 +7,7 @@
 //After step 3 ---- 1 2 ---- (1,3)->1, 2 as it is
 //Final step ---- 1 ---- (1,2)->1
 
-//Every time no is linked lists in becoming half and each step takes O(n) to merge
+//Every time no. of linked lists is becoming half and each step takes O(n) to merge
 //Time complexity - O(n*logk), where n is total nodes and k is no. of linked lists
 //Space complexity - O(1)
 class Solution {
@@ -16,19 +16,17 @@ public:
         int k = lists.size();
         if (k == 0)    return NULL;
         if (k == 1)    return lists[0];
-        int i = 0, last = k - 1;
-        int j;
-        while (last)
+        int i, j = k - 1;
+
+        while (j)
         {
             i = 0;
-            j = last;
             while (i < j)
             {
                 lists[i] = merge(lists[i], lists[j]);
                 i++;
                 j--;
             }
-            last = j;
         }
 
         return lists[0];
@@ -144,7 +142,6 @@ public:
 
 //Time complexity - O(n*logk), where n is total nodes and k is no. of linked lists
 //Space complexity - O(1)
-
 ListNode *mergeKLists(vector<ListNode *> &lists) {
     if (lists.empty()) {
         return nullptr;

@@ -28,3 +28,39 @@ public:
         return false;
     }
 };
+
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2)
+    {
+        int n = s1.size();
+        vector<int>m(26);
+        for (char ch : s1)    m[ch - 'a']++;
+
+        int i = 0, j = 0;
+        while (j < s2.size())
+        {
+            m[s2[j] - 'a']--;
+
+            if (j - i + 1 == n)
+            {
+                if (isAllZero(m))    return true;
+                m[s2[i] - 'a']++;
+                i++;
+            }
+
+            j++;
+        }
+
+        return false;
+    }
+
+    bool isAllZero(vector<int>&m)
+    {
+        for (auto p : m)
+        {
+            if (p != 0)   return false;
+        }
+        return true;
+    }
+};

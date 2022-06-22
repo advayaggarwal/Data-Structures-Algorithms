@@ -1,30 +1,44 @@
+//Brute Force
+//Time complexity - O(n^2)
+//Space complexity - O(1)
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k)
+    {
+        int n = nums.size();
+        int count = 0;
+
+        for (int i = 0; i < n; i++)
+        {
+            int sum = 0;
+            for (int j = i; j < n; j++)
+            {
+                sum += nums[j];
+                if (sum == k)    count++;
+            }
+        }
+
+        return count;
+    }
+};
+
+//Hashmap
 //Time complexity - O(n)
 //Space complexity - O(n)
 class Solution {
 public:
-    int subarraySum(vector<int>& nums, int k) {
-        int i = 0;
-        int n = nums.size();
+    int subarraySum(vector<int>& nums, int k)
+    {
         unordered_map<int, int>m;
-        int sum = 0;
-        int count = 0;
-        //m[0] = 1;
-        while (i < n)
+        m[0] = 1;
+        int count = 0, sum = 0;
+        for (int num : nums)
         {
-            sum += nums[i];
-
-            if (sum == k)  count++;
-            if (m.find(sum - k) != m.end())
-            {
-                count += m[sum - k];
-            }
-
-
+            sum += num;
+            if (m.count(sum - k))  count += m[sum - k];
             m[sum]++;
-            i++;
-
         }
-        return count;
 
+        return count;
     }
 };

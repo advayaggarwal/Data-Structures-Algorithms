@@ -82,6 +82,53 @@ public:
     }
 };
 
+//Using 3d vector
+class Solution {
+public:
+    int maxProfit(vector<int>& prices)
+    {
+        int n = prices.size();
+        vector<vector<vector<int>>>dp(n, vector<vector<int>>(2, vector<int>(3, -1)));
+        return helper(0, prices, 1, 2, dp);
+    }
+
+    int helper(int i, vector<int>&prices, int buy, int k, vector<vector<vector<int>>>&dp)
+    {
+        if (i == prices.size() or k == 0)  return 0;
+        if (dp[i][buy][k] != -1) return dp[i][buy][k];
+
+        if (buy) return dp[i][buy][k] = max(-prices[i] + helper(i + 1, prices, 0, k, dp), helper(i + 1, prices, 1, k, dp));
+
+        else    return dp[i][buy][k] = max(prices[i] + helper(i + 1, prices, 1, k - 1, dp), helper(i + 1, prices, 0, k, dp));
+    }
+};
+
+//Bottom Up DP
+//Time complexity - O(n*2*(k+1))
+//Space complexity - O(n*2*3)
+class Solution {
+public:
+    int maxProfit(vector<int>& prices)
+    {
+        int n = prices.size();
+        vector<vector<vector<int>>>dp(n + 1, vector<vector<int>>(2, vector<int>(3)));
+
+        for (int i = n - 1; i >= 0; i--)
+        {
+            for (int buy = 0; buy <= 1; buy++)
+            {
+                for (int k = 1; k <= 2; k++)
+                {
+                    if (buy) dp[i][buy][k] = max(-prices[i] + dp[i + 1][0][k], dp[i + 1][1][k]);
+                    else    dp[i][buy][k] = max(prices[i] + dp[i + 1][1][k - 1], dp[i + 1][0][k]);
+                }
+            }
+        }
+
+        return dp[0][1][2];
+    }
+};
+
 //Time complexity - O(n)
 //Space complexity - O(1)
 class Solution {

@@ -78,9 +78,10 @@ public:
         {
             for (int j = 0; j < n; j++)
             {
-                if (j == 0)    matrix[i][j] += min(matrix[i + 1][j], matrix[i + 1][j + 1]);
-                else if (j == n - 1) matrix[i][j] += min(matrix[i + 1][j], matrix[i + 1][j - 1]);
-                else    matrix[i][j] += min(matrix[i + 1][j], min(matrix[i + 1][j - 1], matrix[i + 1][j + 1]));
+                int temp = matrix[i + 1][j];
+                if (j + 1 < n) temp = min(temp, matrix[i + 1][j + 1]);
+                if (j - 1 >= 0) temp = min(temp, matrix[i + 1][j - 1]);
+                matrix[i][j] += temp;
             }
         }
 

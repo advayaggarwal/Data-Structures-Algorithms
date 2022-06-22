@@ -1,4 +1,6 @@
 //Recursive
+//Time complexity - O(h)
+//Space complexity - O(h)
 class Solution {
 public:
     TreeNode* insertIntoBST(TreeNode* root, int val) {
@@ -20,6 +22,8 @@ public:
 
 
 //Iterative
+//Time complexity - O(h)
+//Space complexity - O(1)
 class Solution {
 public:
     TreeNode* insertIntoBST(TreeNode *root, int key)

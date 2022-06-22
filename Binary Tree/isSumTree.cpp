@@ -1,4 +1,3 @@
-
 /*
 	AUTHOR:			ADVAY AGGARWAL
 */
@@ -133,7 +132,6 @@ int sumTree(Node *root, bool &ans)
 		ans = false;
 		return -1;
 	}
-
 
 	return (root->val + lSum + rSum);
 }

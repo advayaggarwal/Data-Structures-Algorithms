@@ -23,3 +23,38 @@ public:
         return op1 or op2;
     }
 };
+
+//BFS
+//Time complexity - O(n)
+//Space complexity - O(n)
+class Solution {
+public:
+    bool canReach(vector<int>& arr, int start)
+    {
+        int n = arr.size();
+        queue<int>q;
+        q.push(start);
+        vector<bool>visited(n);
+        visited[start] = true;
+        while (!q.empty())
+        {
+            int node = q.front();
+            q.pop();
+            if (arr[node] == 0)  return true;
+            int nbr1 = node + arr[node];
+            if (nbr1 < n && !visited[nbr1])
+            {
+                q.push(nbr1);
+                visited[nbr1] = true;
+            }
+            int nbr2 = node - arr[node];
+            if (nbr2 >= 0 && !visited[nbr2])
+            {
+                q.push(nbr2);
+                visited[nbr2] = true;
+            }
+        }
+
+        return false;
+    }
+};

@@ -1,4 +1,3 @@
-
 /*
 	AUTHOR:			ADVAY AGGARWAL
 */
@@ -151,14 +150,14 @@ We will push one element at each level. So, the size of the res vector will actu
 we have already stored the result. If the level of some element is more than the size of res vector that means this
 will be a new level for which we have not pushed anything in the res vector. So, we will push this element in the res
 vector. The size of res in next iterations will increase by one and for all the other elements in same level
-res.size() < level will be false
+res.size() == level will be false
 */
 
 //Modified preorder traversal
 void leftViewRecursive(Node *root, int level, vi &res)
 {
 	if (!root)	return;
-	if (res.size() < level)	res.push_back(root->val);
+	if (res.size() == level)	res.push_back(root->val);
 
 	leftViewRecursive(root->left, level + 1, res);
 	leftViewRecursive(root->right, level + 1, res);
@@ -183,7 +182,7 @@ int main()
 
 	vi res;
 	leftView(root, res);
-	leftViewRecursive(root, 1, res);
+	leftViewRecursive(root, 0, res);
 	for (int e : res)	cout << e << " ";
 	return 0;
 }
