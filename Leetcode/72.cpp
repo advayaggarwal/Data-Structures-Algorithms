@@ -90,3 +90,35 @@ public:
         return dp[m][n];
     }
 };
+
+
+//Bottom Up DP with space optimization
+//Time complexity - O(m*n)
+//Space complexity - O(n)
+class Solution {
+public:
+    int minDistance(string word1, string word2)
+    {
+        int m = word1.size(), n = word2.size();
+        vector<int>prev(n + 1);
+
+        for (int i = 0; i <= m; i++)
+        {
+            vector<int>curr(n + 1);
+            for (int j = 0; j <= n; j++)
+            {
+                if (i == 0) curr[j] = j; //one string is empty, so we have to insert length no of chars to make them equal
+                else if (j == 0)    curr[j] = i; //one string is empty, so we have to insert length no of chars to make them equal
+                else
+                {
+                    if (word1[i - 1] == word2[j - 1])    curr[j] = prev[j - 1];
+                    else    curr[j] = 1 + min({prev[j - 1], prev[j], curr[j - 1]}); //{replace, delete, insert}
+                }
+            }
+
+            prev = curr;
+        }
+
+        return prev[n];
+    }
+};

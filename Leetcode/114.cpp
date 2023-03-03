@@ -1,4 +1,6 @@
 //Using preorder traversal
+//Time complexity - O(n)
+//Space complexity - O(n)
 class Solution {
 public:
     void flatten(TreeNode* root) {
@@ -37,6 +39,8 @@ public:
 
 
 //Using reverse postorder traversal
+//Time complexity - O(n)
+//Space complexity - O(n)
 class Solution {
 public:
     void flatten(TreeNode* root) {
@@ -59,5 +63,32 @@ public:
         root->left = NULL;
 
         prev = root;
+    }
+};
+
+
+//Morris Traversal
+//Time complexity - O(n)
+//Space complexity - O(1)
+class Solution {
+public:
+    void flatten(TreeNode* root)
+    {
+        TreeNode *curr = root;
+
+        while (curr)
+        {
+            if (curr->left)
+            {
+                TreeNode *pred = curr->left;
+                while (pred->right) pred = pred->right;
+
+                pred->right = curr->right;
+                curr->right = curr->left;
+                curr->left = NULL;
+            }
+
+            curr = curr->right;
+        }
     }
 };

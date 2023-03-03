@@ -2,23 +2,16 @@
 //Space complexity - O(1)
 class Solution {
 public:
-    int removeDuplicates(vector<int>& nums) {
+    int removeDuplicates(vector<int>& nums)
+    {
         int n = nums.size();
-        if (n == 0)    return 0;
-        int i = 0, j = 1;
-        while (i < n && j < n)
+        int i = 0;
+        for (int j = 0; j < n; j++)
         {
-            if (nums[i] == nums[j])
-            {
-                j++;
-            }
-            else
-            {
-                i++;
-                nums[i] = nums[j];
-                j++;
-            }
+            if (nums[i] == nums[j])  continue;
+            else nums[++i] = nums[j];
         }
+
         return i + 1;
     }
 };

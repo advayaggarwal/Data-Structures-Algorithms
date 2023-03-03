@@ -1,5 +1,6 @@
 //Using STL
-
+//Time complexity - O(logn)
+//Space complexity - O(1)
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
@@ -26,7 +27,8 @@ public:
 
 
 //Without using STL
-
+//Time complexity - O(logn)
+//Space complexity - O(1)
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
@@ -59,8 +61,7 @@ public:
             else if (nums[mid] > target)   hi = mid - 1;
             else l = mid + 1;
         }
+
         res.push_back(ans);
-
     }
-
 };

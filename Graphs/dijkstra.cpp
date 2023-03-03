@@ -33,6 +33,40 @@ void starter()
 	cout.tie(0);
 }
 
+//Using Min Heap
+//Time complexity - O((V+E)*logV) = O(ElogV)
+vector <int> dijkstra(int V, vector<pii> adj[], int S)
+{
+	vector<int>dist(V, INT_MAX);
+	dist[S] = 0;
+
+	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>minHeap; //{dist, node};
+
+	minHeap.push({0, S});
+
+	while (!minHeap.empty())
+	{
+		int node = minHeap.top().second;
+		int currCost = minHeap.top().first;
+		minHeap.pop();
+
+		for (auto nbr : adj[node])
+		{
+			int edgeWeight = nbr.second;
+			int nbrNode = nbr.first;
+
+			if (edgeWeight + currCost < dist[nbrNode])
+			{
+				dist[nbrNode] = edgeWeight + currCost;
+				minHeap.push({dist[nbrNode], nbrNode});
+			}
+		}
+	}
+
+	return dist;
+}
+
+//Using set
 //Time complexity - O((V+E)*logV) = O(ElogV)
 void dijkstra(int src, int n, vector<pii>adj[], vi &distance)
 {

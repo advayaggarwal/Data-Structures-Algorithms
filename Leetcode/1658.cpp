@@ -118,7 +118,7 @@ public:
 
 /*
     Sliding Window
-    Find the maximum subarray having sum = total sum-x
+    Find the maximum subarray having sum = totalSum-x
     So that will minimise our actual answer
 */
 //Time complexity - O(n)

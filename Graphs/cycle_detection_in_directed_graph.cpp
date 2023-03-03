@@ -81,17 +81,16 @@ bool bfs(int n, vi adj[])
 	{
 		int node = q.front();
 		q.pop();
+		node_count++;
 
 		for (int nbr : adj[node])
 		{
 			indegree[nbr]--;
 			if (indegree[nbr] == 0)	q.push(nbr);
 		}
-
-		node_count++;
 	}
 
-	return node_count == n ? true : false;
+	return node_count != n;
 }
 
 int main()

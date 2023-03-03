@@ -38,33 +38,24 @@ int longestCommonSubstring(string &s1, string &s2, int i, int j, int count)
 {
 	if (i == s1.size() or j == s2.size())	return count;
 
-	if (s1[i] == s2[j])
-	{
-		count = longestCommonSubstring(s1, s2, i + 1, j + 1, count + 1);
-	}
+	int same = count;
+	if (s1[i] == s2[j])	same = longestCommonSubstring(s1, s2, i + 1, j + 1, count + 1);
 
-	count = max({count, longestCommonSubstring(s1, s2, i + 1, j, 0), longestCommonSubstring(s1, s2, i, j + 1, 0)});
-
-	return count;
+	return max({same, longestCommonSubstring(s1, s2, i + 1, j, 0), longestCommonSubstring(s1, s2, i, j + 1, 0)});
 }
 
-/*
-int longestCommonSubstringTD(string &s1, string &s2, int i, int j, int count, vvi &dp)
+//Time complexity - O(n^3)
+int longestCommonSubstring(string &s1, string &s2, int i, int j, int count, vector<vector<vector<int>>>&dp)
 {
 	if (i == s1.size() or j == s2.size())	return count;
+	if (dp[i][j][count] != -1)	return dp[i][j][count];
 
-	if (dp[i][j] != -1)	return dp[i][j];
+	int same = count;
+	if (s1[i] == s2[j])	same = longestCommonSubstring(s1, s2, i + 1, j + 1, count + 1, dp);
 
-	if (s1[i] == s2[j])
-	{
-		count = longestCommonSubstringTD(s1, s2, i + 1, j + 1, count + 1, dp);
-	}
-
-	count = max({count, longestCommonSubstringTD(s1, s2, i + 1, j, 0, dp), longestCommonSubstringTD(s1, s2, i, j + 1, 0, dp)});
-
-	return dp[i][j] = count;
+	return dp[i][j][count] = max({same, longestCommonSubstring(s1, s2, i + 1, j, 0, dp), longestCommonSubstring(s1, s2, i, j + 1, 0, dp)});
 }
-*/
+
 
 //Time complexity - O(m*n)
 //Space complexity - O(m*n)

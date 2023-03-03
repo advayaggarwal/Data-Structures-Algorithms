@@ -31,7 +31,7 @@ public:
 
     void inorder(TreeNode *root, TreeNode* &prev, bool &isBST)
     {
-        if (!root)  return ;
+        if (!root)  return;
 
         inorder(root->left, prev, isBST);
 

@@ -1,40 +1,32 @@
+//Time complexity - O(n)
+//Space complexity - O(h)
 class Solution {
 public:
-    vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
-
-        vector<vector<int>>ans;
-        vector<int>path;
-
-        findPaths(root, targetSum, ans, path);
-
-        return ans;
-
+    vector<vector<int>> pathSum(TreeNode* root, int targetSum)
+    {
+        vector<int>ans;
+        vector<vector<int>>res;
+        if (!root)   return res;
+        helper(root, targetSum, ans, res);
+        return res;
     }
 
-
-    void findPaths(TreeNode *root, int targetSum, vector<vector<int>>&ans, vector<int>&path)
+    void helper(TreeNode* root, int targetSum, vector<int>&ans, vector<vector<int>>&res)
     {
-        if (!root)   return;
-
         targetSum -= root->val;
-        path.push_back(root->val);
+        ans.push_back(root->val);
 
-        if (!root->left and !root->right and targetSum == 0) //found path having sum as targetSum
+        if (!root->left && !root->right)
         {
-            ans.push_back(path);
+            if (targetSum == 0)  res.push_back(ans);
+            targetSum += root->val;
+            ans.pop_back();
             return;
         }
 
-        if (root->left)
-        {
-            findPaths(root->left, targetSum, ans, path);
-            path.pop_back();
-        }
-
-        if (root->right)
-        {
-            findPaths(root->right, targetSum, ans, path);
-            path.pop_back();
-        }
+        if (root->left)  helper(root->left, targetSum, ans, res);
+        if (root->right) helper(root->right, targetSum, ans, res);
+        targetSum += root->val;
+        ans.pop_back();
     }
 };

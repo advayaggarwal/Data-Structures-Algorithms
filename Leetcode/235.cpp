@@ -1,3 +1,5 @@
+//Time complexity - O(logn)
+//Space complexity - O(logn)
 class Solution {
 public:
 	TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)

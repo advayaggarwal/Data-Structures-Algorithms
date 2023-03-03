@@ -1,4 +1,33 @@
 //Matrix Chain Multiplication
+//Top Down
+//Time complexity - O(n^3)
+//Space complexity - O(n^2)
+class Solution {
+public:
+    int maxCoins(vector<int>& nums)
+    {
+        nums.push_back(1);
+        nums.insert(nums.begin(), 1);
+        vector<vector<int>>dp(nums.size(), vector<int>(nums.size(), -1));
+        return helper(1, nums.size() - 2, nums, dp);
+    }
+
+    int helper(int i, int j, vector<int>&nums, vector<vector<int>>&dp)
+    {
+        if (i > j)   return 0;
+        if (dp[i][j] != -1)  return dp[i][j];
+
+        int ans = INT_MIN;
+        for (int k = i; k <= j; k++)
+        {
+            ans = max(ans, helper(i, k - 1, nums, dp) + helper(k + 1, j, nums, dp) + nums[i - 1] * nums[k] * nums[j + 1]);
+        }
+
+        return dp[i][j] = ans;
+    }
+};
+
+//Bottom Up
 //Time complexity - O(n^3)
 //Space complexity - O(n^2)
 class Solution {

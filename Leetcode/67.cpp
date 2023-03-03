@@ -4,44 +4,23 @@ class Solution {
 public:
     string addBinary(string a, string b)
     {
+        string ans;
         int carry = 0;
-        int m = a.size() - 1, n = b.size() - 1;
-        string res;
+        int i = a.size() - 1, j = b.size() - 1;
 
-        while (m >= 0 or n >= 0)
+        while (i >= 0 or j >= 0 or carry)
         {
-            int d1 = m >= 0 ? a[m--] - '0' : 0;
-            int d2 = n >= 0 ? b[n--] - '0' : 0;
-            int sum = d1 + d2 + carry;
-            if (sum == 0)
-            {
-                res += '0';
-                carry = 0;
-            }
+            int sum = 0;
+            if (i >= 0)  sum += (a[i--] - '0');
+            if (j >= 0)  sum += (b[j--] - '0');
+            if (carry)   sum += carry;
 
-            else if (sum == 1)
-            {
-                res += '1';
-                carry = 0;
-            }
-
-            else if (sum == 2)
-            {
-                res += '0';
-                carry = 1;
-            }
-
-            else
-            {
-                res += '1';
-                carry = 1;
-            }
+            ans += (sum % 2 + '0');
+            carry = sum / 2;
         }
 
-        if (carry) res += '1';
-
-        reverse(res.begin(), res.end());
-        return res;
+        reverse(ans.begin(), ans.end());
+        return ans;
     }
 };
 

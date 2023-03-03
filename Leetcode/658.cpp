@@ -28,13 +28,14 @@ public:
 
 
 //Using Max Heap
-//Time complexity - O(nlogk)
+//Time complexity - O(nlogk + klogk)
 //Space complexity- O(k)
 #define pii pair<int,int>
 
 class Solution {
 public:
-	vector<int> findClosestElements(vector<int>& v, int k, int x) {
+	vector<int> findClosestElements(vector<int>& v, int k, int x)
+	{
 		priority_queue<pii> maxHeap; //{distance, element}
 
 		for (int i = 0; i < v.size(); i++)
@@ -62,11 +63,10 @@ public:
 
 //Binary Search
 //Time complexity - O(logn + k + klogk)
-
 class Solution {
 public:
-	vector<int> findClosestElements(vector<int>& arr, int k, int x) {
-
+	vector<int> findClosestElements(vector<int>& arr, int k, int x)
+	{
 		int n = arr.size();
 		vector<int>res;
 

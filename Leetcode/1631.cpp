@@ -53,6 +53,47 @@ public:
 //Space complexity - O(m*n)
 class Solution {
 public:
+    int minimumEffortPath(vector<vector<int>>& heights)
+    {
+        int m = heights.size(), n = heights[0].size();
+        int dx[4] = {1, -1, 0, 0};
+        int dy[4] = {0, 0, 1, -1};
+
+        set<pair<int, pair<int, int>>>s; //{dist, {x, y}};
+        vector<vector<int>>dist(m, vector<int>(n, INT_MAX));
+        dist[0][0] = 0;
+        s.insert({0, {0, 0}});
+
+        while (!s.empty())
+        {
+            auto it = *(s.begin());
+            int diff = it.first;
+            int i = it.second.first, j = it.second.second;
+            if (i == m - 1 && j == n - 1)    return diff; //for small improvement
+            s.erase(it);
+
+            for (int k = 0; k < 4; k++)
+            {
+                int x = i + dx[k], y = j + dy[k];
+
+                if (x >= 0 && x < m && y >= 0 && y < n && max(diff, abs(heights[i][j] - heights[x][y])) < dist[x][y])
+                {
+                    if (s.count({dist[x][y], {x, y}}))   s.erase({dist[x][y], {x, y}});
+                    dist[x][y] = max(diff, abs(heights[i][j] - heights[x][y]));
+                    s.insert({dist[x][y], {x, y}});
+                }
+            }
+        }
+
+        return dist[m - 1][n - 1];
+    }
+};
+
+//Dijkstra's Algorithm
+//Time complexity - O(m*n*log(m*n))
+//Space complexity - O(m*n)
+class Solution {
+public:
     int minimumEffortPath(vector<vector<int>> &heights) {
         int m = heights.size(), n = heights[0].size();
         int dirs[5] = { -1, 0, 1, 0, -1};

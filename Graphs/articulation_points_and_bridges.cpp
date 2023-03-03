@@ -36,19 +36,19 @@ void starter()
 //Tarjan's Algorithm
 //Time complexity - O(V+E)
 //Space complexity - O(V)
-void dfs(int src, vector<int>adj[], vector<int>&par, vector<int>&disc, vector<int>&low, vector<bool>articulation_point, int &time)
+void dfs(int src, vector<int>adj[], vector<int>&par, vector<int>&time, vector<int>&low, vector<bool>articulation_point, int &t)
 {
-	disc[src] = low[src] = time;
-	time++;
+	time[src] = low[src] = t;
+	t++;
 	int count = 0; //total dfs calls from src
 
 	for (int &nbr : adj[src])
 	{
-		if (disc[nbr] == -1) //nbr not visited
+		if (time[nbr] == -1) //nbr not visited
 		{
 			par[nbr] = src;
 			count++;
-			dfs(nbr, adj, par, disc, low, articulation_point, time);
+			dfs(nbr, adj, par, time, low, articulation_point, t);
 			low[src] = min(low[src], low[nbr]);
 
 			if (par[src] == -1) //actual source, so have to check separately
@@ -58,13 +58,14 @@ void dfs(int src, vector<int>adj[], vector<int>&par, vector<int>&disc, vector<in
 				//so actual src can't be an articulation point
 				if (count >= 2)	articulation_point[src] = true;
 			}
-			//for bridge the condition would be low[nbr] > disc[src]
-			else if (low[nbr] >= disc[src])	articulation_point[src] = true; //can't do articulation points++
+
+			// *** for bridge the condition would be low[nbr] > time[src] ***
+			else if (low[nbr] >= time[src])	articulation_point[src] = true; //can't do articulation points++
 		}
 
 		else if (nbr != par[src]) //nbr visited but it's not the parent of src, it means cycle exists
 		{
-			low[src] = min(low[src], disc[nbr]);
+			low[src] = min(low[src], time[nbr]);
 		}
 	}
 }
@@ -88,11 +89,22 @@ int main()
 		adj[v].push_back(u);
 	}
 
-	vector<int>par(n, -1), disc(n, -1), low(n, -1);
-	vector<bool>articulation_point(n, false);
-	int time = 0;
+	/*
 
-	dfs(0, adj, par, disc, low, articulation_point, time);
+	In case of bridges -
+	time means time of insertion while doing dfs
+	low means lowest time of insertion of all adjacent nodes apart from parent
+
+	In case of articulation point -
+	time means time of insertion while doing dfs
+	low means lowest time of insertion of all adjacent nodes apart from parent and visited nodes
+
+	*/
+	vector<int>par(n, -1), time(n, -1), low(n, -1);
+	vector<bool>articulation_point(n, false);
+	int t = 0;
+
+	dfs(0, adj, par, time, low, articulation_point, t);
 
 	int totalArticulationPoints = 0;
 	for (int i = 0; i < n; i++)

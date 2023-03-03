@@ -33,6 +33,9 @@ void starter()
 	cout.tie(0);
 }
 
+
+//Time complexity - O(E*logE)
+//Space complexity - O(E)
 int prim_mst(int n, vector<pair<int, int>>adj[])
 {
 	//Init a min heap

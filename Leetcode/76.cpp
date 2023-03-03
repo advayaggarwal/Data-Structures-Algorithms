@@ -33,8 +33,6 @@ public:
                 i++;
             }
             j++;
-
-
         }
 
         string res;

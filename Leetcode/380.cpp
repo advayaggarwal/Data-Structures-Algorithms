@@ -54,13 +54,13 @@ public:
 /*
 Explanation:
 
-Usually the first thing that comes to find when we hear "lookup" , "insert" in constant time is "hashmaps".
-That's the reason we use an unordered_map here which stores the element as " key " and its position in vector as the "value ".. The average time complexity of search , insert and remove elements from a hashmap is O(1).
+Usually the first thing that comes to find when we hear "lookup", "insert" in constant time is "hashmaps".
+That's the reason we use an unordered_map here which stores the element as "key" and its position in vector as the "value".. The average time complexity of search , insert and remove elements from a hashmap is O(1).
 
 However , here we need to support "Random()" access in O(1) as well. so we are using a vector here to achieve that.
 
 Now the code is fairly simple to understand if you read it, but there is a trick to remove the element in O(1) time from a vector.
-This trick is very commonly used in competitive programming , so its ok if you could not come up with it by yourself :-)
+This trick is very commonly used in competitive programming, so its ok if you could not come up with it by yourself :-)
 
 Here is the trick to remove in constant time.
 Assume that the order of elements does not matter.

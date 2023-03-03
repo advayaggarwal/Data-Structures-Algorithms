@@ -10,7 +10,7 @@ public:
     }
 };
 
-//Recursion Top Down
+//Recursion Bottom Up
 class Solution {
 public:
     int uniquePaths(int m, int n) {
@@ -68,6 +68,28 @@ public:
     }
 };
 
+//Bottom Up DP with space optimisation
+//Time complexity - O(m*n)
+//Space complexity - O(n)
+class Solution {
+public:
+    int uniquePaths(int m, int n)
+    {
+        vector<int>prev(n, 1), curr(n, 1);
+
+        for (int i = 1; i < m; i++)
+        {
+            for (int j = 1; j < n; j++)
+            {
+                curr[j] = curr[j - 1] + prev[j];
+            }
+            prev = curr;
+        }
+
+        return curr[n - 1];
+    }
+};
+
 //Bottom Up DP
 //Time complexity - O(m*n)
 //Space complexity - O(m*n)
@@ -101,7 +123,12 @@ public:
         int r = m - 1;
         for (int i = 1; i <= r; i++)
         {
-            ans = ans * 1LL * (N - r + i) / i; //eg- 10C3 = (8*9*10)/1*2*3
+            ans = ans * 1LL * (N - r + i) / i;
+            /*
+            eg- 10C3 = (8/1)*(9/2)*(10/3)
+            Don't do (10/1)*(9/2)*(8/3)
+            Mathematically both are same but the 2nd one will give integer overflow
+            */
         }
 
         return ans;

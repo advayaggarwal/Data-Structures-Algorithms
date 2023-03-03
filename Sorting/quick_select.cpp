@@ -58,8 +58,8 @@ int partition(vi &arr, int lo, int hi)
 
 int quickSelect(vi &arr, int lo, int hi, int k)
 {
-	if (lo <= hi) {
-
+	if (lo <= hi)
+	{
 		int pi = partition(arr, lo, hi);
 		if (pi == k)	return arr[pi];
 		else if (pi < k)	return quickSelect(arr, pi + 1, hi, k);

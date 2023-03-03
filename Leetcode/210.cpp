@@ -1,3 +1,6 @@
+//Using BFS - Kahn's Algorithm
+//Time complexity - O(V+E)
+//Space complexity - O(V+E)
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
@@ -51,5 +54,43 @@ public:
             count++;
         }
     }
+};
 
+//Using DFS
+//Time complexity - O(V+E)
+//Space complexity - O(V+E)
+class Solution {
+public:
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites)
+    {
+        vector<int>adj[numCourses], res;
+        vector<bool>visited(numCourses), dfs_visited(numCourses);
+        for (auto v : prerequisites)  adj[v[1]].push_back(v[0]);
+        for (int i = 0; i < numCourses; i++)
+        {
+            if (!visited[i]) if (dfs(i, adj, visited, dfs_visited, res))  return {};
+        }
+        reverse(res.begin(), res.end());
+        return res;
+    }
+
+    bool dfs(int source, vector<int> adj[], vector<bool> &visited, vector<bool> &dfs_visited, vector<int>&res)
+    {
+        visited[source] = true;
+        dfs_visited[source] = true;
+
+        for (int neigh : adj[source])
+        {
+            if (!visited[neigh])
+            {
+                if (dfs(neigh, adj, visited, dfs_visited, res)) return true;
+            }
+
+            else if (dfs_visited[neigh])    return true;
+        }
+
+        dfs_visited[source] = false;
+        res.push_back(source);
+        return false;
+    }
 };

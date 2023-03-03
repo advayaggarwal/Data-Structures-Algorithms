@@ -25,6 +25,7 @@ void starter()
 // We are checking that if there exists an iteration in which no swap was performed then array is already sorted
 //So break the outer for loop, i.e. no need of further iterations
 //Worst case Time complexity -> O(n^2)
+//Average case Time complexity -> O(n^2)
 //Best case Time complexity -> O(n)
 //Stable, as we will only swap when arr[j] > arr[j+1]
 //Inplace as space complexity -> O(1)
@@ -48,10 +49,8 @@ void bubble_sort(int arr[], int n)
 				swap = true;
 			}
 		}
-		if (swap == false)
-		{
-			break;
-		}
+
+		if (swap == false)	break;
 	}
 }
 

@@ -10,17 +10,13 @@ public:
         int n = buildings.size();
         for (int i = 0; i < n; i++)
         {
-            build.push_back({buildings[i][0], -buildings[i][2]});
-            build.push_back({buildings[i][1], buildings[i][2]});
+            build.push_back({buildings[i][0], -buildings[i][2]}); //starting point
+            build.push_back({buildings[i][1], buildings[i][2]}); //ending point
         }
 
-        sort(build.begin(), build.end(), [&](pair<int, int>&a, pair<int, int>&b) {
-            if (a.first == b.first)  return a.second < b.second;
-            return a.first < b.first;
-        });
+        sort(build.begin(), build.end());
 
         multiset<int>height; //using it as max priority queue, thereby pushing heights as negative
-        height.insert(0);
         int maxHeight = 0;
 
         for (int i = 0; i < build.size(); i++)

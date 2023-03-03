@@ -52,6 +52,7 @@ vector<int> bellmanFord(int n, int src, vector<vector<int>>&edges)
 		}
 	}
 
+	//nth relaxation
 	//negative weight cycle detection
 	for (auto edge : edges)
 	{

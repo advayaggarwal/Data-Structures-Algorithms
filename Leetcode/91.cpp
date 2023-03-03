@@ -63,3 +63,35 @@ public:
         return dp[0];
     }
 };
+
+//Bottom Up DP with space optimisation
+//Time complexity - O(n)
+//Space complexity - O(1)
+class Solution {
+public:
+    int numDecodings(string s) {
+
+        int n = s.size();
+        int curr = 0, next = 1, nextNext = 0;
+
+        for (int i = n - 1; i >= 0; i--)
+        {
+            if (s[i] == '0') curr = 0;
+            else
+            {
+                curr = next;
+
+                if (i < n - 1)
+                {
+                    int no = (s[i] - '0') * 10 + (s[i + 1] - '0');
+                    if (no >= 10 and no <= 26)  curr += nextNext;
+                }
+            }
+
+            nextNext = next;
+            next = curr;
+        }
+
+        return curr;
+    }
+};

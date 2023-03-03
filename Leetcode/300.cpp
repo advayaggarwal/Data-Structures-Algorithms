@@ -53,6 +53,34 @@ public:
     }
 };
 
+//Top Down DP
+//Time complexity - O(n^2)
+//Space complexity - O(n)
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums)
+    {
+        vector<int>dp(nums.size(), -1);
+        for (int i = nums.size() - 1; i >= 0; i--)
+        {
+            if (dp[i] == -1)    helper(i, nums, dp);
+        }
+
+        return *max_element(dp.begin(), dp.end());
+    }
+
+    int helper(int i, vector<int>&nums, vector<int>&dp)
+    {
+        if (dp[i] != -1) return dp[i];
+        int ans = 1;
+        for (int j = 0; j < i; j++)
+        {
+            if (nums[i] > nums[j])   ans = max(ans, 1 + helper(j, nums, dp));
+        }
+        return dp[i] = ans;
+    }
+};
+
 //Bottom Up DP
 //Time complexity - O(n^2)
 //Space complexity - O(n)

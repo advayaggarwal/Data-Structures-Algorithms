@@ -83,17 +83,29 @@ int lisTD(vi &v, int index, int n, int prev, vvi &dp)
 //Top Down DP
 //Time complexity - O(n^2)
 //Space complexity - O(n)
-int lis(vi &v, int i, vi &dp)
+int lisHelper(vi &v, int i, vi &dp)
 {
 	if (dp[i] != -1)	return dp[i];
 	int ans = 1;
 	for (int j = 0; j < i; j++)
 	{
-		if (v[i] > v[j])	ans = max(ans, lis(v, j, dp) + 1);
+		if (v[i] > v[j])	ans = max(ans, lisHelper(v, j, dp) + 1);
 	}
 
 	return dp[i] = ans;
 }
+
+int lis(vi &v)
+{
+	vi dp(v.size(), -1);
+	for (int i = v.size() - 1; i >= 0; i--)
+	{
+		if (dp[i] == -1)    lisHelper(v, i, dp);
+	}
+
+	return *max_element(dp.begin(), dp.end());
+}
+
 
 //Bottom Up DP
 //Time complexity - O(n^2)

@@ -1,44 +1,34 @@
-//Dijkstra - TLE
-//Time complexity - O((V+E)*logV) = O(ElogV)
+//Queue
+//Time complexity - O(E+V)
 class Solution {
 public:
     int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k)
     {
-        vector<pair<int, int>>adj[n];
-
-        for (int i = 0; i < flights.size(); i++)
+        vector<pair<int, int>>adj[n]; //{node, cost}
+        for (auto f : flights)   adj[f[0]].push_back({f[1], f[2]});
+        vector<int>dist(n, INT_MAX);
+        dist[src] = 0;
+        queue<pair<int, pair<int, int>>>q; //{stops, {node, cost}}
+        q.push({0, {src, 0}});
+        while (!q.empty())
         {
-            int u = flights[i][0];
-            int v = flights[i][1];
-            int wt = flights[i][2];
-            adj[u].push_back({v, wt});
-        }
-
-        priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>>minHeap; //cost, node, k
-
-        minHeap.push({0, {src, k}});
-
-        while (!minHeap.empty())
-        {
-            auto p = minHeap.top();
-            minHeap.pop();
-
-            int cost = p.first;
-            int node = p.second.first;
-            int stops = p.second.second;
-
-            if (node == dst) return cost;
-
-            if (stops >= 0)
+            auto it = q.front();
+            q.pop();
+            int stops = it.first, node = it.second.first, cost = it.second.second;
+            if (stops > k)   continue;
+            for (auto iter : adj[node])
             {
-                for (auto nbr : adj[node])
+                int adjNode = iter.first;
+                int edgeWeight = iter.second;
+                if (cost + edgeWeight < dist[adjNode])
                 {
-                    minHeap.push({cost + nbr.second, {nbr.first, stops - 1}});
+                    dist[adjNode] = cost + edgeWeight;
+                    q.push({stops + 1, {adjNode, dist[adjNode]}});
                 }
             }
         }
 
-        return -1;
+        return dist[dst] == INT_MAX ? -1 : dist[dst];
     }
 };
 

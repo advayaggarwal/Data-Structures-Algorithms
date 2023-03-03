@@ -69,6 +69,44 @@ public:
     }
 };
 
+//Top Down DP
+//Time complexity - O(m*n)
+//Space complexity - O(m*n)
+class Solution {
+public:
+    bool isMatch(string s, string p)
+    {
+        vector<vector<int>>dp(s.size(), vector<int>(p.size(), -1));
+        return helper(0, 0, s, p, dp);
+    }
+
+    int helper(int i, int j, string &s, string &p, vector<vector<int>>&dp)
+    {
+        if (i >= s.size())
+        {
+            int len = p.size() - j;
+            if (len & 1)   return 0;
+            int countOfStar = 0;
+            while (j < p.size())
+            {
+                if (p[j] == '*') countOfStar++;
+                j++;
+            }
+
+            return countOfStar == len / 2;
+
+        }
+        if (j >= p.size())   return 0;
+        if (dp[i][j] != -1)  return dp[i][j];
+
+        if (j + 1 < p.size() && p[j + 1] == '*')
+            return dp[i][j] = helper(i, j + 2, s, p, dp) or ((p[j] == s[i] or p[j] == '.') && helper(i + 1, j, s, p, dp));
+
+        if (p[j] == s[i] or p[j] == '.') return dp[i][j] = helper(i + 1, j + 1, s, p, dp);
+        return dp[i][j] = false;
+    }
+};
+
 //Bottom Up DP, simply converting top down to bottom up
 //Time complexity - O(m*n)
 //Space complexity - O(m*n)

@@ -52,7 +52,7 @@ public:
     }
 };
 
-//Bottom Up DP
+//Bottom Up DP with space optimisation
 //Time complexity - O(n)
 //Space complexity - O(1), only need two previous states
 class Solution {

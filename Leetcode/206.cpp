@@ -59,13 +59,9 @@ public:
     ListNode* reverseList(ListNode* head) {
 
         if (head == NULL || head->next == NULL)  return head;
-
         ListNode *shead = reverseList(head->next);
-
-        if (head && head->next)  head->next->next = head;
+        head->next->next = head;
         head->next = NULL;
         return shead;
     }
-
-
 };

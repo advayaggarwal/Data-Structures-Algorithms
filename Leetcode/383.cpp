@@ -1,21 +1,16 @@
+//Time complexity - O(m+n), where m is #chars in magazine, and n is #chars in ransomNote
+//Space complexity - O(1)
 class Solution {
 public:
-    bool canConstruct(string ransomNote, string magazine) {
-
-        if (magazine.size() < ransomNote.size()) return false;
-
-        vector<int>freq(26, 0);
-
-        for (char ch : magazine) freq[ch - 'a']++;
-
-        int n = ransomNote.size();
-        for (int i = 0; i < n; i++)
+    bool canConstruct(string ransomNote, string magazine)
+    {
+        vector<int>freq(26);
+        for (char c : magazine)  freq[c - 'a']++;
+        for (char c : ransomNote)
         {
-            if (freq[ransomNote[i] - 'a'] <= 0 )    return false;
-
-            freq[ransomNote[i] - 'a']--;
+            freq[c - 'a']--;
+            if (freq[c - 'a'] < 0) return false;
         }
-
         return true;
     }
 };

@@ -5,17 +5,13 @@ class Solution {
 public:
     int minCostClimbingStairs(vector<int>& cost)
     {
-        int n = cost.size();
-        int op1 = helper(0, cost);
-        int op2 = helper(1, cost);
-        return min(op1, op2);
+        return min(helper(0, cost), helper(1, cost));
     }
 
-    int helper(int index, vector<int>&cost)
+    int helper(int i, vector<int>&cost)
     {
-        if (index >= cost.size())    return 0;
-
-        return dp[index] = cost[index] + min(helper(index + 1, cost), helper(index + 2, cost));
+        if (i >= cost.size())    return 0;
+        return cost[i] + min(helper(i + 1, cost), helper(i + 2, cost));
     }
 };
 
@@ -26,27 +22,19 @@ class Solution {
 public:
     int minCostClimbingStairs(vector<int>& cost)
     {
-        int n = cost.size();
-        vector<int>dp(n + 1, -1);
-
-        int op1 = helper(0, cost, dp);
-        int op2 = helper(1, cost, dp);
-        return min(op1, op2);
+        vector<int>dp(cost.size(), -1);
+        return min(helper(0, cost, dp), helper(1, cost, dp));
     }
 
-    int helper(int index, vector<int>&cost, vector<int>&dp)
+    int helper(int i, vector<int>&cost, vector<int>&dp)
     {
-        if (index >= cost.size())    return 0;
-
-        if (dp[index] != -1)   return dp[index];
-
-        int ans = cost[index];
-
-        return dp[index] = ans + min(helper(index + 1, cost, dp), helper(index + 2, cost, dp));
+        if (i >= cost.size())    return 0;
+        if (dp[i] != -1) return dp[i];
+        return dp[i] = cost[i] + min(helper(i + 1, cost, dp), helper(i + 2, cost, dp));
     }
 };
 
-//Top Down DP
+//Bottom Up DP
 //Time complexity - O(n)
 //Space complexity - O(n), we need only 2 states i and i+1, so it can be done in O(1) space also
 class Solution {
@@ -62,5 +50,25 @@ public:
         }
 
         return min(dp[0], dp[1]);
+    }
+};
+
+//Bottom Up DP with space optimisation
+//Time complexity - O(n)
+//Space complexity - O(1)
+class Solution {
+public:
+    int minCostClimbingStairs(vector<int>& cost)
+    {
+        int next = 0, nextNext = 0;
+
+        for (int i = cost.size() - 1; i >= 0; i--)
+        {
+            int curr = cost[i] + min(next, nextNext);
+            nextNext = next;
+            next = curr;
+        }
+
+        return min(next, nextNext);
     }
 };

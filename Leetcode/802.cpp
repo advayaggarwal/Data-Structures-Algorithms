@@ -2,7 +2,14 @@
 //Time complexity - O(V+E)
 //Space complexity - O(V)
 
-//All the nodes which are a part of cycle will not be a safe node
+/*
+
+All the nodes which are a part of cycle will not be a safe node and all the nodes connected to cycle also will not be a safe node
+If we find cycle in directed graph using DFS, for the nodes which are a part of cycle or can lead to a cycle
+will always be marked as true in pathVisited.
+
+*/
+
 class Solution {
 public:
     vector<int> eventualSafeNodes(vector<vector<int>>& graph)
@@ -42,6 +49,45 @@ public:
 
         dfsVisited[src] = false;
 
+        return false;
+    }
+};
+
+class Solution {
+public:
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph)
+    {
+        int n = graph.size();
+        vector<bool>visited(n), pathVisited(n);
+        for (int i = 0; i < n; i++)
+        {
+            if (!visited[i]) dfs(i, visited, pathVisited, graph);
+        }
+
+        vector<int>res;
+        for (int i = 0; i < n; i++)
+        {
+            if (!pathVisited[i]) res.push_back(i);
+        }
+        return res;
+    }
+
+    bool dfs(int i, vector<bool>&visited, vector<bool>&pathVisited, vector<vector<int>>&graph)
+    {
+        visited[i] = true;
+        pathVisited[i] = true;
+
+        for (int nbr : graph[i])
+        {
+            if (!visited[nbr])
+            {
+                if (dfs(nbr, visited, pathVisited, graph))   return true;
+            }
+
+            else if (pathVisited[nbr])   return true;
+        }
+
+        pathVisited[i] = false;
         return false;
     }
 };

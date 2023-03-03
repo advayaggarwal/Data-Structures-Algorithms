@@ -1,6 +1,5 @@
 //Time complexity - O(n*n*log(n*n)), where n is the size of matrix
 //Space complexity - O(n*n), as we are using vector
-
 class Solution {
 public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
@@ -25,10 +24,9 @@ public:
 //Space complexity - O(1)
 class Solution {
 public:
-    int kthSmallest(vector<vector<int>>& matrix, int k) {
-
+    int kthSmallest(vector<vector<int>>& matrix, int k)
+    {
         int n = matrix.size();
-
         int low = matrix[0][0];
         int hi = matrix[n - 1][n - 1];
         int ans = -1;
@@ -49,11 +47,8 @@ public:
 
     int countLessOrEqual(int mid, vector<vector<int>>&matrix, int n)
     {
-
         int i = 0, j = n - 1, count = 0;
-
-
-        while (i<n and j >= 0)
+        while (i < n and j >= 0)
         {
             if (matrix[i][j] <= mid)
             {
@@ -74,7 +69,7 @@ public:
 
 //Min heap
 //Time complexity - O(klogn), n is the size of matrix
-//Space complexity - O(k)
+//Space complexity - O(n)
 class Solution {
 public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
